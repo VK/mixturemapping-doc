@@ -1,0 +1,31 @@
+
+TrainableCovMatrix
+------------------
+.. automodule:: mixturemapping.layers.covmatrix
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+   
+LinearMapping
+------------------
+.. automodule:: mixturemapping.layers.linearmapping
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+GeneralMapping
+------------------
+.. automodule:: mixturemapping.layers.generalmapping
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Distribution
+-------------
+.. automodule:: mixturemapping.layers.distribution
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,23 @@
+Mixture Mapping
+===============
+
+Layers
+-----------
+.. toctree::
+   mixturemapping.layers
+
+
+Distributions
+-------------
+.. automodule:: mixturemapping.distributions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Utils
+-----
+.. automodule:: mixturemapping.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
