@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="TrainableCovMatrix" href="mixturemapping.layers.html" />
-    <link rel="prev" title="Indices and tables" href="index.html" /> 
+    <link rel="prev" title="Mixture Mapping" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,13 +45,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Mixture Mapping</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#layers">Layers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html">TrainableCovMatrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#linearmapping">LinearMapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#generalmapping">GeneralMapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#distribution">Distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#distributions">Distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.distributions">Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.utils">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -87,17 +87,144 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html">TrainableCovMatrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#linearmapping">LinearMapping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#generalmapping">GeneralMapping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#distribution">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a></li>
 </ul>
 </div>
 </section>
-<section id="distributions">
-<h2>Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline"></a></h2>
+<section id="module-mixturemapping.distributions">
+<span id="distributions"></span><h2>Distributions<a class="headerlink" href="#module-mixturemapping.distributions" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.distributions.createCovMatrix">
+<span class="sig-name descname"><span class="pre">createCovMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdDevTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlationTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CorrelationMatrix'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.distributions.createCovMatrix" title="Permalink to this definition"></a></dt>
+<dd><p>Create a covariance matrix from stdDev, correlation and the desired output size</p>
+<p>The function computes a square covariance matrix from the input standard
+deviations and then reduces correlation values based on the correlationTensor</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>stdDevTensor: tensorflow::Tensor</dt><dd><p>A tensorflow::Tensor with all standard deviations (shape=[batch, dim])</p>
+</dd>
+<dt>corrTensor: tensorflow::Tensor</dt><dd><p>A tensorflow::Tensor will all correlation values (shape=[batch, dim2])</p>
+</dd>
+<dt>size: int</dt><dd><p>Python int of the output matrix size used for index mapping between stdDev and
+correlation</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns: </dt><dd><p>A Tensor with a batch of covariance matrices (shape=[batch, dim, dim])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.distributions.createMixDistBYmeanCovWeight">
+<span class="sig-name descname"><span class="pre">createMixDistBYmeanCovWeight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meanTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mixSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrixSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GaussianMixture'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.distributions.createMixDistBYmeanCovWeight" title="Permalink to this definition"></a></dt>
+<dd><p>Create a TensorflowProbability mixture distribution as defined by the input Tensors</p>
+<p>The function computes a TensorflowProbability mixture distribution for the full batch based on
+gaussian distributions of the input parameters.
+The dimensions of the input tensors are ordered by [batch, mixCompnent, InputDimension]</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>meanTensor: tensorflow::Tensor</dt><dd><p>Tensor with all mean values of the distributions (shape=[batch, mixSize, dim])</p>
+</dd>
+<dt>covTensor: tensorflow::Tensor</dt><dd><p>Tensor with all covariance Matrices (shape=[batch, mixSize, dim, dim])</p>
+</dd>
+<dt>weightTensor: tensorflow::Tensor</dt><dd><p>A tensorflow::Tensor with the mixture weights (shape=[batch, mixSize, dim2])</p>
+</dd>
+<dt>mixSize: python int</dt><dd><p>Python int of the distribution size</p>
+</dd>
+<dt>matrixSize: python int</dt><dd><p>Python int with the size of the output distribution</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A TensorflowProbability mixture distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.distributions.createMixDistribution">
+<span class="sig-name descname"><span class="pre">createMixDistribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meanTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdDevTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlationTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mixSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrixSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GaussianMixture'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.distributions.createMixDistribution" title="Permalink to this definition"></a></dt>
+<dd><p>Create a TensorflowProbability mixture distribution as defined by the input Tensors</p>
+<p>The function computes a TensorflowProbability mixture distribution for the full batch based on
+gaussian distributions of the input parameters.
+The dimensions of the input tensors are ordered by [batch, mixCompnent, InputDimension]</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>meanTensor: A tensorflow::Tensor with all mean values of the distributions (shape=[batch, mixSize, dim])
+stdDevTensor: A tensorflow::Tensor with all standard deviations (shape=[batch, mixSize, dim])
+correlationTensor: A tensorflow::Tensor with all correlation values (shape=[batch, mixSize, dim2])
+weightTensor: A tensorflow::Tensor with the mixture weights (shape=[batch, mixSize, dim2])
+mixSize: Python int of the distribution size
+matrixSize: Python int with the size of the output distribution</p>
+</dd>
+<dt>Returns:</dt><dd><p>A TensorflowProbability mixture distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.distributions.regularizeCovMatrix">
+<span class="sig-name descname"><span class="pre">regularizeCovMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">covMatrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.999</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.distributions.regularizeCovMatrix" title="Permalink to this definition"></a></dt>
+<dd><p>regularize a covariance matrix to prevent cholesky transform errors</p>
+<p>The code assumes the last two components of the input tensor to be a covariance matrix.
+We regularize by multiplying all off diagonal elements with epsilon (default: 0.999)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>covMatrix: tensorflow:Tensor of the covariance. Dimensions: (…, M, M) with M of the covariance
+epsilon: correlation reduction (default:0.999)</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="utils">
-<h2>Utils<a class="headerlink" href="#utils" title="Permalink to this headline"></a></h2>
+<section id="module-mixturemapping.utils">
+<span id="utils"></span><h2>Utils<a class="headerlink" href="#module-mixturemapping.utils" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.utils.getSkleanGM">
+<span class="sig-name descname"><span class="pre">getSkleanGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdDev</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.utils.getSkleanGM" title="Permalink to this definition"></a></dt>
+<dd><p>create a Gaussian Mixture Model from Sklearn based on weights, means and stdDev</p>
+<dl>
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>weights:  array-like, shape (n_components,)</dt><dd><p>The weights of each mixture components.</p>
+</dd>
+<dt>means:    array-like, shape (n_components, n_features)</dt><dd><p>The mean of each mixture component.</p>
+</dd>
+</dl>
+<p>stdDev:   array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.utils.lastEntryJacobian">
+<span class="sig-name descname"><span class="pre">lastEntryJacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_pfor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Jacobian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_gradients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.utils.lastEntryJacobian" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs the Jacobi Matrix based of the last entries of <cite>ys(xs)</cite> w.r.t. <cite>xs</cite> at <cite>xs</cite></p>
+<p>The internal computation is based on symbolic derivatives from tensorflow.gradients</p>
+<dl>
+<dt>Args:</dt><dd><p>ys:         A tf.Tensor to be differentiated.
+xs:         A tf.Tensor to be used for differentiation.
+use_pfor:   If true, uses pfor for computing the jacobian. Else</p>
+<blockquote>
+<div><p>uses tf.while_loop.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>parallel_iterations:  A knob to control how many iterations and</dt><dd><p>dispatched in parallel. This knob can be used to control
+the total memory usage.</p>
+</dd>
+</dl>
+<p>name:       Optional name to use for grouping all the operations. defaults to ‘Jacobian’.
+stop_gradients: Optional. A Tensor or list of tensors not to differentiate through.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A tf.Tensor with the same structure as <cite>xs</cite> plus an additional dimension, with the
+size of the last dimension of <cite>xs</cite>. The two last dimensions represent the jacobian of
+<cite>ys</cite> w.r.t. to the corresponding values in <cite>xs</cite>. 
+If <cite>xs</cite> has shape [xs_1, …, xs_n] and <cite>ys</cite> has shape [ys_1, …, ys_m], the corresponding
+output has shape [ys_1, …, ys_n, xs_m]. With this the last two dimensions [ys_n, xs_m]
+represent a jacobian.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -105,7 +232,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Indices and tables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Mixture Mapping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="mixturemapping.layers.html" class="btn btn-neutral float-right" title="TrainableCovMatrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
