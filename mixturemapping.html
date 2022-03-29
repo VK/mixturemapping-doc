@@ -48,10 +48,12 @@
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">BinYield</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.distributions">Distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.binning">Binning</a></li>
 </ul>
 </li>
 </ul>
@@ -90,6 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">BinYield</a></li>
 </ul>
 </div>
 </section>
@@ -221,6 +224,129 @@ size of the last dimension of <cite>xs</cite>. The two last dimensions represent
 If <cite>xs</cite> has shape [xs_1, …, xs_n] and <cite>ys</cite> has shape [ys_1, …, ys_m], the corresponding
 output has shape [ys_1, …, ys_n, xs_m]. With this the last two dimensions [ys_n, xs_m]
 represent a jacobian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-mixturemapping.binning">
+<span id="binning"></span><h2>Binning<a class="headerlink" href="#module-mixturemapping.binning" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.binning.BinningScheme">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinningScheme</span></span><a class="headerlink" href="#mixturemapping.binning.BinningScheme" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>define a single bin by an array of sample points
+and an area weight</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.binning.BinningScheme.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.BinningScheme.append" title="Permalink to this definition"></a></dt>
+<dd><p>Append SingleBin to the end of the list</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mixturemapping.binning.BinningScheme.points">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">points</span></span><a class="headerlink" href="#mixturemapping.binning.BinningScheme.points" title="Permalink to this definition"></a></dt>
+<dd><p>Combined integration sample points.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mixturemapping.binning.BinningScheme.weights">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#mixturemapping.binning.BinningScheme.weights" title="Permalink to this definition"></a></dt>
+<dd><p>Combined weights</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.binning.SingleBin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SingleBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.SingleBin" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>define a single bin by an array of sample points
+and an area weight</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mixturemapping.binning.SingleBin.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mixturemapping.binning.SingleBin.points">
+<span class="sig-name descname"><span class="pre">points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.points" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mixturemapping.binning.SingleBin.weight">
+<span class="sig-name descname"><span class="pre">weight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.weight" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.binning.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.combine" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>combine muptiple SingleBins</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>bins:   array of SingleBins</dt><dd><p>the bins to combine</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A new SingleBin</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.binning.getPolygonBin">
+<span class="sig-name descname"><span class="pre">getPolygonBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.getPolygonBin" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>compute <cite>n</cite> sample points inside a polygon, such that the polygon is optimaly covered</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>points:   array, shape (n_points, 2)</dt><dd><p>the points of the polygon (in 2d)</p>
+</dd>
+<dt>name:     str</dt><dd><p>Name of the bin</p>
+</dd>
+<dt>n:        int</dt><dd><p>number of points to compute</p>
+</dd>
+<dt>n_start:  int</dt><dd><p>number of points to start with</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A <cite>SingleBin</cite> of sample points with dimension (n, 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mixturemapping.binning.getRangeBin">
+<span class="sig-name descname"><span class="pre">getRangeBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.getRangeBin" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>compute <cite>n</cite> sample points inside [min, max], such that the range is optimaly covered</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>min:      float</dt><dd><p>the minimum of the range</p>
+</dd>
+<dt>max:      float</dt><dd><p>the maximum of the range</p>
+</dd>
+<dt>name:     str</dt><dd><p>Name of the bin</p>
+</dd>
+<dt>n:        int</dt><dd><p>number of points to compute</p>
+</dd>
+<dt>n_start:  int</dt><dd><p>number of points to start with</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A <cite>SingleBin</cite> of sample points with dimension (n, 1)</p>
 </dd>
 </dl>
 </dd></dl>

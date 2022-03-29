@@ -29,3 +29,11 @@ Distribution
    :members:
    :undoc-members:
    :show-inheritance:
+
+
+BinYield
+-------------
+.. automodule:: mixturemapping.layers.binyield
+   :members:
+   :undoc-members:
+   :show-inheritance:   

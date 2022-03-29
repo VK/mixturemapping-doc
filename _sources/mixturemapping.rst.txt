@@ -21,3 +21,10 @@ Utils
    :undoc-members:
    :show-inheritance:
 
+
+Binning
+-------
+.. automodule:: mixturemapping.binning
+   :members:
+   :undoc-members:
+   :show-inheritance:

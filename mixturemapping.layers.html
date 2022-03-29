@@ -47,10 +47,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.distribution">Distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">BinYield</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.html#module-mixturemapping.distributions">Distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.html#module-mixturemapping.utils">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.html#module-mixturemapping.binning">Binning</a></li>
 </ul>
 </li>
 </ul>
@@ -528,6 +530,75 @@ model.compile(optimizer=optimizer, loss=distLayer.sample_loss(inTsamples))
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tf.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mixturemapping.layers.binyield">
+<span id="binyield"></span><h1>BinYield<a class="headerlink" href="#module-mixturemapping.layers.binyield" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinYield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.base_layer.Layer</span></code></p>
+<p>Create a keras layer to compute the bin yield.</p>
+<p>We use sample points to define the bin structure. Each of the <cite>binN</cite>
+bins has <cite>sampleN</cite> sample points with <cite>outN</cite> values. <cite>outN</cite> must 
+be the same dimension as the event_shape of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scheme</strong> (<a class="reference internal" href="mixturemapping.html#mixturemapping.binning.BinningScheme" title="mixturemapping.binning.BinningScheme"><em>binning.BinningScheme</em></a>) – The binning scheme we want to apply</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Binyield</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="k">yield</span> <span class="o">=</span> <span class="n">binLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the the dist layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the binned distribution of a tfp.distributions.Distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tfp.distributions</em><em> [</em><em>batch</em><em>, </em><em>outN</em><em>]</em>) – The distribution</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The binning result as a tensor</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor (shape=[batch, binN])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>If the layer has not been built, this method will call build on
+the layer. This assumes that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
+shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output shape tuple.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
