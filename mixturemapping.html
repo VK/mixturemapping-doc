@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -83,9 +84,9 @@
            <div itemprop="articleBody">
              
   <section id="mixture-mapping">
-<h1>Mixture Mapping<a class="headerlink" href="#mixture-mapping" title="Permalink to this headline"></a></h1>
+<h1>Mixture Mapping<a class="headerlink" href="#mixture-mapping" title="Permalink to this heading"></a></h1>
 <section id="layers">
-<h2>Layers<a class="headerlink" href="#layers" title="Permalink to this headline"></a></h2>
+<h2>Layers<a class="headerlink" href="#layers" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html">TrainableCovMatrix</a></li>
@@ -97,7 +98,7 @@
 </div>
 </section>
 <section id="module-mixturemapping.distributions">
-<span id="distributions"></span><h2>Distributions<a class="headerlink" href="#module-mixturemapping.distributions" title="Permalink to this headline"></a></h2>
+<span id="distributions"></span><h2>Distributions<a class="headerlink" href="#module-mixturemapping.distributions" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="mixturemapping.distributions.createCovMatrix">
 <span class="sig-name descname"><span class="pre">createCovMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stdDevTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correlationTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CorrelationMatrix'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.distributions.createCovMatrix" title="Permalink to this definition"></a></dt>
@@ -181,7 +182,7 @@ epsilon: correlation reduction (default:0.999)</p>
 
 </section>
 <section id="module-mixturemapping.utils">
-<span id="utils"></span><h2>Utils<a class="headerlink" href="#module-mixturemapping.utils" title="Permalink to this headline"></a></h2>
+<span id="utils"></span><h2>Utils<a class="headerlink" href="#module-mixturemapping.utils" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="mixturemapping.utils.getSkleanGM">
 <span class="sig-name descname"><span class="pre">getSkleanGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdDev</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.utils.getSkleanGM" title="Permalink to this definition"></a></dt>
@@ -230,7 +231,7 @@ represent a jacobian.</p>
 
 </section>
 <section id="module-mixturemapping.binning">
-<span id="binning"></span><h2>Binning<a class="headerlink" href="#module-mixturemapping.binning" title="Permalink to this headline"></a></h2>
+<span id="binning"></span><h2>Binning<a class="headerlink" href="#module-mixturemapping.binning" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.binning.BinningScheme">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinningScheme</span></span><a class="headerlink" href="#mixturemapping.binning.BinningScheme" title="Permalink to this definition"></a></dt>
@@ -239,7 +240,7 @@ represent a jacobian.</p>
 and an area weight</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.binning.BinningScheme.append">
-<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.BinningScheme.append" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">SingleBin</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.BinningScheme.append" title="Permalink to this definition"></a></dt>
 <dd><p>Append SingleBin to the end of the list</p>
 </dd></dl>
 
@@ -259,7 +260,7 @@ and an area weight</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.binning.SingleBin">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SingleBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.SingleBin" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SingleBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.SingleBin" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>define a single bin by an array of sample points
 and an area weight</p>
@@ -270,7 +271,7 @@ and an area weight</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mixturemapping.binning.SingleBin.points">
-<span class="sig-name descname"><span class="pre">points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.points" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.points" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -282,7 +283,7 @@ and an area weight</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mixturemapping.binning.combine">
-<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.combine" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">SingleBin</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.combine" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>combine muptiple SingleBins</p>
 <dl class="simple">
@@ -301,7 +302,7 @@ and an area weight</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mixturemapping.binning.getPolygonBin">
-<span class="sig-name descname"><span class="pre">getPolygonBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.getPolygonBin" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getPolygonBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.getPolygonBin" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>compute <cite>n</cite> sample points inside a polygon, such that the polygon is optimaly covered</p>
 <dl class="simple">
@@ -326,7 +327,7 @@ and an area weight</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="mixturemapping.binning.getRangeBin">
-<span class="sig-name descname"><span class="pre">getRangeBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">mixturemapping.binning.SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.getRangeBin" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getRangeBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mixturemapping.binning.SingleBin" title="mixturemapping.binning.SingleBin"><span class="pre">SingleBin</span></a></span></span><a class="headerlink" href="#mixturemapping.binning.getRangeBin" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>compute <cite>n</cite> sample points inside [min, max], such that the range is optimaly covered</p>
 <dl class="simple">

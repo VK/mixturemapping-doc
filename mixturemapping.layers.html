@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -83,11 +84,11 @@
            <div itemprop="articleBody">
              
   <section id="module-mixturemapping.layers.covmatrix">
-<span id="trainablecovmatrix"></span><h1>TrainableCovMatrix<a class="headerlink" href="#module-mixturemapping.layers.covmatrix" title="Permalink to this headline"></a></h1>
+<span id="trainablecovmatrix"></span><h1>TrainableCovMatrix<a class="headerlink" href="#module-mixturemapping.layers.covmatrix" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.TrainableCovMatrix">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TrainableCovMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.base_layer.Layer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
 <p>Generates an independently trainable covariance matrix</p>
 <p>Important symmetry properties are generated automatically because the covariance matrix
 is built up from standard deviations <cite>TrainableCovMatrix.spread</cite>
@@ -214,11 +215,11 @@ if they want to modify it.</p>
 
 </section>
 <section id="module-mixturemapping.layers.linearmapping">
-<span id="linearmapping"></span><h1>LinearMapping<a class="headerlink" href="#module-mixturemapping.layers.linearmapping" title="Permalink to this headline"></a></h1>
+<span id="linearmapping"></span><h1>LinearMapping<a class="headerlink" href="#module-mixturemapping.layers.linearmapping" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.linearmapping.LinearMapping">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LinearMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.linearmapping.LinearMapping" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mixturemapping.layers._mapping._Mapping</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Mapping</span></code></p>
 <p>A free linear mapping layer, that maps centers and distributions independently.</p>
 <p>This layers can be used if the relationship between input distributions
 and output distributions is free and linear</p>
@@ -307,11 +308,11 @@ shape: [batch, mix]</p>
 
 </section>
 <section id="module-mixturemapping.layers.generalmapping">
-<span id="generalmapping"></span><h1>GeneralMapping<a class="headerlink" href="#module-mixturemapping.layers.generalmapping" title="Permalink to this headline"></a></h1>
+<span id="generalmapping"></span><h1>GeneralMapping<a class="headerlink" href="#module-mixturemapping.layers.generalmapping" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.generalmapping.GeneralMapping">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeneralMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.generalmapping.GeneralMapping" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mixturemapping.layers._mapping._Mapping</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Mapping</span></code></p>
 <p>A free general mapping layer, that maps centers and distributions independently.</p>
 <p>This layers can be used if the relationship between input distributions
 and output distributions is free and general</p>
@@ -409,11 +410,11 @@ shape: [batch, mix]</p>
 
 </section>
 <section id="module-mixturemapping.layers.distribution">
-<span id="distribution"></span><h1>Distribution<a class="headerlink" href="#module-mixturemapping.layers.distribution" title="Permalink to this headline"></a></h1>
+<span id="distribution"></span><h1>Distribution<a class="headerlink" href="#module-mixturemapping.layers.distribution" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.base_layer.Layer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
 <p>Create a keras layer with a gaussian mixture distribution.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;x&quot;: ???, &quot;cov&quot;: ???, &quot;w&quot;: ???}
@@ -538,11 +539,11 @@ model.compile(optimizer=optimizer, loss=distLayer.sample_loss(inTsamples))
 
 </section>
 <section id="module-mixturemapping.layers.binyield">
-<span id="binyield"></span><h1>BinYield<a class="headerlink" href="#module-mixturemapping.layers.binyield" title="Permalink to this headline"></a></h1>
+<span id="binyield"></span><h1>BinYield<a class="headerlink" href="#module-mixturemapping.layers.binyield" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinYield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">keras.engine.base_layer.Layer</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
 <p>Create a keras layer to compute the bin yield.</p>
 <p>We use sample points to define the bin structure. Each of the <cite>binN</cite>
 bins has <cite>sampleN</cite> sample points with <cite>outN</cite> values. <cite>outN</cite> must 
