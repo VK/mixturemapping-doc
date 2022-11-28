@@ -17,6 +17,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,11 +45,26 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="mixturemapping.html">Mixture Mapping</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="mixturemapping.html#layers">Layers</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">TrainableCovMatrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.distribution">Distribution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">BinYield</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">TrainableCovMatrix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">LinearMapping</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.linearmapping.LinearMapping"><code class="docutils literal notranslate"><span class="pre">LinearMapping</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.generalmapping">GeneralMapping</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.generalmapping.GeneralMapping"><code class="docutils literal notranslate"><span class="pre">GeneralMapping</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.distribution">Distribution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.Distribution"><code class="docutils literal notranslate"><span class="pre">Distribution</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">BinYield</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.html#module-mixturemapping.distributions">Distributions</a></li>
@@ -71,9 +87,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="mixturemapping.html">Mixture Mapping</a> &raquo;</li>
-      <li>TrainableCovMatrix</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="mixturemapping.html">Mixture Mapping</a></li>
+      <li class="breadcrumb-item active">TrainableCovMatrix</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/mixturemapping.layers.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -228,17 +244,22 @@ and output distributions is free and linear</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>regularize_cov_epsilon<span class="classifier">python float</span></dt><dd><p>if not None cov matrix corelation is restricted (eg. 0.995)</p>
 </dd>
 </dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
-<dt>“x”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
 </dd>
-<dt>“cov”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
 </dd>
-<dt>“w”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
 </dd>
 </dl>
 </dd>
@@ -270,13 +291,13 @@ the first execution of <cite>call()</cite>.</p>
 <dd><p>Compute the output distribution layer based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl class="simple">
 <dt>Parameters:</dt><dd><dl class="simple">
-<dt>x: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
 shape: [batch, mix, inDim]</p>
 </dd>
-<dt>stdDev: Instance of <cite>tf.Tensor</cite></dt><dd><p>Std Deviation <cite>tf.Tensor</cite> of the input mixture distribution
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Std Deviation <cite>tf.Tensor</cite> of the input mixture distribution
 shape: [batch, mix, inDim]</p>
 </dd>
-<dt>w: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
 shape: [batch, mix]</p>
 </dd>
 <dt>covA: Instance of <cite>tf.Tensor</cite> [optional]</dt><dd><p>Optional Covariance Matrix to increase distribution spread
@@ -290,13 +311,13 @@ shape: [batch, outDim, outDim] if effect is mixture independent</p>
 </dl>
 </dd>
 <dt>Returns:</dt><dd><dl class="simple">
-<dt>x: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
 shape: [batch, mix, outDim]</p>
 </dd>
-<dt>cov: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
 shape: [batch, mix, outDim, outDim]</p>
 </dd>
-<dt>w: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
 shape: [batch, mix]</p>
 </dd>
 </dl>
@@ -304,6 +325,7 @@ shape: [batch, mix]</p>
 </dl>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 </section>
@@ -321,17 +343,22 @@ and output distributions is free and general</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
+<section id="id5">
+<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>regularize_cov_epsilon<span class="classifier">python float</span></dt><dd><p>if not None cov matrix corelation is restricted (eg. 0.995)</p>
 </dd>
 </dl>
+</section>
+<section id="id6">
+<h2>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
-<dt>“x”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
 </dd>
-<dt>“cov”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
 </dd>
-<dt>“w”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
 </dd>
 </dl>
 </dd>
@@ -363,23 +390,23 @@ the first execution of <cite>call()</cite>.</p>
 <dd><p>Compute the output distribution layer based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl>
 <dt>Parameters:</dt><dd><dl>
-<dt>x: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
 shape: [batch, mix, inDim]</p>
 </dd>
-<dt>stdDev: Instance of <cite>tf.Tensor</cite></dt><dd><p>Std Deviation <cite>tf.Tensor</cite> of the input mixture distribution
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Std Deviation <cite>tf.Tensor</cite> of the input mixture distribution
 shape: [batch, mix, inDim]</p>
+</dd>
+<dt>covariances<span class="classifier">Instance of <cite>tf.Tensor</cite></span></dt><dd><p>Cov Matrix Tensor of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
 </dd>
 <dt>y<span class="classifier">Instance of <cite>tf.Tensor</cite></span></dt><dd><p>Means Tensor of the output mixture distribution
 shape: [batch, mix, outDim]</p>
 </dd>
 <dt>yDelta<span class="classifier">Instance of <cite>tf.Tensor</cite></span></dt><dd><p>Means Tensor of the output mixture distribution
 shape: [batch, mix, outDim]</p>
-</dd>
-<dt>cov<span class="classifier">Instance of <cite>tf.Tensor</cite></span></dt><dd><p>Cov Matrix Tensor of the input mixture distribution
-shape: [batch, mix, inDim, inDim]</p>
-</dd>
-<dt>w: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
-shape: [batch, mix]</p>
 </dd>
 <dt>covA: Instance of <cite>tf.Tensor</cite> [optional]</dt><dd><p>Optional Covariance Matrix to increase distribution spread
 shape: [batch, mix, outDim, outDim] if effect is mixture dependent
@@ -392,13 +419,13 @@ shape: [batch, outDim, outDim] if effect is mixture independent</p>
 </dl>
 </dd>
 <dt>Returns:</dt><dd><dl class="simple">
-<dt>x: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
 shape: [batch, mix, outDim]</p>
 </dd>
-<dt>cov: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
 shape: [batch, mix, outDim, outDim]</p>
 </dd>
-<dt>w: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
 shape: [batch, mix]</p>
 </dd>
 </dl>
@@ -406,6 +433,7 @@ shape: [batch, mix]</p>
 </dl>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 </section>
@@ -417,7 +445,7 @@ shape: [batch, mix]</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
 <p>Create a keras layer with a gaussian mixture distribution.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;x&quot;: ???, &quot;cov&quot;: ???, &quot;w&quot;: ???}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
 distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
 dist = distLayer(distParams)
 </pre></div>
@@ -449,9 +477,9 @@ on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>]</em>) – Means <cite>tf.Tensor</cite> of the mixture distribution</p></li>
-<li><p><strong>cov</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>, </em><em>inDim</em><em>]</em>) – Cov Matrix Tensor of the mixture distribution</p></li>
-<li><p><strong>w</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>]</em>) – Weight <cite>tf.Tensor</cite> ot the mixture components</p></li>
+<li><p><strong>means</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>]</em>) – Means <cite>tf.Tensor</cite> of the mixture distribution</p></li>
+<li><p><strong>covariances</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>, </em><em>inDim</em><em>]</em>) – Cov Matrix Tensor of the mixture distribution</p></li>
+<li><p><strong>weights</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>]</em>) – Weight <cite>tf.Tensor</cite> ot the mixture components</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -514,7 +542,7 @@ of the returned dict if they want to modify it.</p>
 <span class="sig-name descname"><span class="pre">sample_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.sample_loss" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a sample loss function.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;x&quot;: ???, &quot;cov&quot;: ???, &quot;w&quot;: ???}
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
 distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
 dist = distLayer(distParams)
 

@@ -17,6 +17,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,9 +53,36 @@
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">BinYield</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.distributions">Distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.utils">Utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.binning">Binning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.distributions">Distributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.distributions.createCovMatrix"><code class="docutils literal notranslate"><span class="pre">createCovMatrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.distributions.createMixDistBYmeanCovWeight"><code class="docutils literal notranslate"><span class="pre">createMixDistBYmeanCovWeight()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.distributions.createMixDistribution"><code class="docutils literal notranslate"><span class="pre">createMixDistribution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.distributions.regularizeCovMatrix"><code class="docutils literal notranslate"><span class="pre">regularizeCovMatrix()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.utils.getSkleanGM"><code class="docutils literal notranslate"><span class="pre">getSkleanGM()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.utils.lastEntryJacobian"><code class="docutils literal notranslate"><span class="pre">lastEntryJacobian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.binning">Binning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.binning.BinningScheme"><code class="docutils literal notranslate"><span class="pre">BinningScheme</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.binning.BinningScheme.append"><code class="docutils literal notranslate"><span class="pre">BinningScheme.append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.binning.BinningScheme.points"><code class="docutils literal notranslate"><span class="pre">BinningScheme.points</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.binning.BinningScheme.weights"><code class="docutils literal notranslate"><span class="pre">BinningScheme.weights</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.binning.SingleBin"><code class="docutils literal notranslate"><span class="pre">SingleBin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.binning.SingleBin.name"><code class="docutils literal notranslate"><span class="pre">SingleBin.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.binning.SingleBin.points"><code class="docutils literal notranslate"><span class="pre">SingleBin.points</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.binning.SingleBin.weight"><code class="docutils literal notranslate"><span class="pre">SingleBin.weight</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.binning.combine"><code class="docutils literal notranslate"><span class="pre">combine()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.binning.getPolygonBin"><code class="docutils literal notranslate"><span class="pre">getPolygonBin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixturemapping.binning.getRangeBin"><code class="docutils literal notranslate"><span class="pre">getRangeBin()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -72,8 +100,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Mixture Mapping</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Mixture Mapping</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/mixturemapping.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -89,11 +117,52 @@
 <h2>Layers<a class="headerlink" href="#layers" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html">TrainableCovMatrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">BinYield</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html">TrainableCovMatrix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.build"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.call"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.compute_output_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.get_config"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping"><code class="docutils literal notranslate"><span class="pre">LinearMapping</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.build"><code class="docutils literal notranslate"><span class="pre">LinearMapping.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.call"><code class="docutils literal notranslate"><span class="pre">LinearMapping.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping"><code class="docutils literal notranslate"><span class="pre">GeneralMapping</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.build"><code class="docutils literal notranslate"><span class="pre">GeneralMapping.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.call"><code class="docutils literal notranslate"><span class="pre">GeneralMapping.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution"><code class="docutils literal notranslate"><span class="pre">Distribution</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.build"><code class="docutils literal notranslate"><span class="pre">Distribution.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.call"><code class="docutils literal notranslate"><span class="pre">Distribution.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">Distribution.compute_output_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.get_config"><code class="docutils literal notranslate"><span class="pre">Distribution.get_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.sample_loss"><code class="docutils literal notranslate"><span class="pre">Distribution.sample_loss()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">BinYield</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.build"><code class="docutils literal notranslate"><span class="pre">BinYield.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.call"><code class="docutils literal notranslate"><span class="pre">BinYield.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">BinYield.compute_output_shape()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
