@@ -74,16 +74,39 @@
 <h1>Mixture Mapping<a class="headerlink" href="#mixture-mapping" title="Permalink to this heading"></a></h1>
 <dl class="simple">
 <dt>Provides:</dt><dd><ol class="arabic simple">
-<li><p>???</p></li>
-<li><p>???</p></li>
+<li><p>Layers to build tensorflow models to map Gaussian mixtures</p></li>
+<li><p>Tools to compute yield values of Gaussian mixtures in complex binning schemes</p></li>
 </ol>
 </dd>
 </dl>
-</section>
-<section id="howto-use">
-<h1>Howto use<a class="headerlink" href="#howto-use" title="Permalink to this heading"></a></h1>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
-<span class="go">MixtureMapping: Turn off eager execution because the current tensor flow probability has some issues with eager execution!</span>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+
+<span class="n">mapModel</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+<span class="n">mapModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
+<span class="n">mapModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
+<span class="n">mapModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">mapModel</span><span class="p">(</span><span class="n">inMeans</span><span class="p">)</span>
+
+<span class="n">deltaModel</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+<span class="n">deltaModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
+<span class="n">deltaModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
+<span class="n">deltaModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">))</span>
+<span class="n">yDelta</span> <span class="o">=</span> <span class="n">deltaModel</span><span class="p">(</span><span class="n">inMeans</span><span class="p">)</span>
+
+<span class="n">covALayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">TrainableCovMatrix</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CovA&quot;</span><span class="p">)</span>
+<span class="n">covA</span> <span class="o">=</span> <span class="n">covALayer</span><span class="p">(</span><span class="n">inMeans</span><span class="p">)</span>
+
+<span class="n">mapLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GeneralMapping</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mapping&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">newDist</span> <span class="o">=</span> <span class="n">mapLayer</span><span class="p">({</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;yDelta&#39;</span><span class="p">:</span><span class="n">yDelta</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">,</span> <span class="s1">&#39;covA&#39;</span><span class="p">:</span> <span class="n">covA</span><span class="p">})</span>
+
+<span class="n">distLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Distribution</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">,</span> <span class="n">regularize_cov_epsilon</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">newDist</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -91,7 +114,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.html">Mixture Mapping</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.html#layers">Layers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html">TrainableCovMatrix</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html">Basic</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.build"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.build()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.call"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.call()</span></code></a></li>
@@ -99,25 +122,6 @@
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.get_config"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.get_config()</span></code></a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">LinearMapping</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping"><code class="docutils literal notranslate"><span class="pre">LinearMapping</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.build"><code class="docutils literal notranslate"><span class="pre">LinearMapping.build()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.call"><code class="docutils literal notranslate"><span class="pre">LinearMapping.call()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">GeneralMapping</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping"><code class="docutils literal notranslate"><span class="pre">GeneralMapping</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.build"><code class="docutils literal notranslate"><span class="pre">GeneralMapping.build()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.call"><code class="docutils literal notranslate"><span class="pre">GeneralMapping.call()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">Distribution</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution"><code class="docutils literal notranslate"><span class="pre">Distribution</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.build"><code class="docutils literal notranslate"><span class="pre">Distribution.build()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.call"><code class="docutils literal notranslate"><span class="pre">Distribution.call()</span></code></a></li>
@@ -128,11 +132,36 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">BinYield</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">Mapping</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping"><code class="docutils literal notranslate"><span class="pre">LinearMapping</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.build"><code class="docutils literal notranslate"><span class="pre">LinearMapping.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.call"><code class="docutils literal notranslate"><span class="pre">LinearMapping.call()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping"><code class="docutils literal notranslate"><span class="pre">GeneralMapping</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.build"><code class="docutils literal notranslate"><span class="pre">GeneralMapping.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.call"><code class="docutils literal notranslate"><span class="pre">GeneralMapping.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">Binning</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.build"><code class="docutils literal notranslate"><span class="pre">BinYield.build()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.call"><code class="docutils literal notranslate"><span class="pre">BinYield.call()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">BinYield.compute_output_shape()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.gmrmapping">Gaussian Mixtures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR"><code class="docutils literal notranslate"><span class="pre">ConstGMR</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR.set_gmm"><code class="docutils literal notranslate"><span class="pre">ConstGMR.set_gmm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR"><code class="docutils literal notranslate"><span class="pre">DynamicGMR</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.set_gmm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.set_gmm_values()</span></code></a></li>
 </ul>
 </li>
 </ul>
