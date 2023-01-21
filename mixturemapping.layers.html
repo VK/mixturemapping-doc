@@ -48,6 +48,9 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Basic</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.Distribution"><code class="docutils literal notranslate"><span class="pre">Distribution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionMean"><code class="docutils literal notranslate"><span class="pre">DistributionMean</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionSampleLoss"><code class="docutils literal notranslate"><span class="pre">DistributionSampleLoss</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionSamples"><code class="docutils literal notranslate"><span class="pre">DistributionSamples</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">Mapping</a><ul>
@@ -134,7 +137,7 @@ the first execution of <cite>call()</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.TrainableCovMatrix.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix.call" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix.call" title="Permalink to this definition"></a></dt>
 <dd><p>This is where the layer’s logic lives.</p>
 <p>The <cite>call()</cite> method may not create state (except in its first invocation,
 wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
@@ -260,7 +263,7 @@ can become  non-invertible.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.call" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.call" title="Permalink to this definition"></a></dt>
 <dd><p>Constructs a Gaussian mixture distribution based
 on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl class="field-list simple">
@@ -326,28 +329,229 @@ of the returned dict if they want to modify it.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.sample_loss">
-<span class="sig-name descname"><span class="pre">sample_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.sample_loss" title="Permalink to this definition"></a></dt>
-<dd><p>Generate a sample loss function.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionMean">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionMean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to extract the mean of a distribution</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
 distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
 dist = distLayer(distParams)
-
-model = tf.keras.Model(inputs=[inMean, inStdDev, inWeight, inTsamples], outputs=dist)
-model.compile(optimizer=optimizer, loss=distLayer.sample_loss(inTsamples))
+mean = mm.layers.DistributionMean()(dist)
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionMean.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean.call" title="Permalink to this definition"></a></dt>
+<dd><p>This is where the layer’s logic lives.</p>
+<p>The <cite>call()</cite> method may not create state (except in its first invocation,
+wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
+It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
+that is called automatically before <cite>call()</cite> executes the first time.</p>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
+- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
+<blockquote>
+<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
+of a keyword argument.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
+<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
+<li><p>Layers are built (<cite>build(input_shape)</cite> method)
+using shape info from <cite>inputs</cite> only.</p></li>
+<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
+<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
+If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
+casting behavior in mixed precision should be handled manually.</p></li>
+<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
+<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
+TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
+positional and keyword arguments.</p></li>
+</ul>
+</dd>
+<dt><a href="#id5"><span class="problematic" id="id6">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
+</dd>
+<dt><a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
+The following optional keyword arguments are reserved:
+- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
+<blockquote>
+<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
+<cite>mask</cite> argument, its default value will be set to the mask generated
+for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
+that generated a corresponding mask, i.e. if it came from a Keras
+layer with masking support).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSampleLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionSampleLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to extract the mean of a distribution</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
+dist = distLayer(distParams)
+mean = mm.layers.DistributionMean()(dist)
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSampleLoss.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss.call" title="Permalink to this definition"></a></dt>
+<dd><p>This is where the layer’s logic lives.</p>
+<p>The <cite>call()</cite> method may not create state (except in its first invocation,
+wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
+It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
+that is called automatically before <cite>call()</cite> executes the first time.</p>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
+- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
+<blockquote>
+<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
+of a keyword argument.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
+<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
+<li><p>Layers are built (<cite>build(input_shape)</cite> method)
+using shape info from <cite>inputs</cite> only.</p></li>
+<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
+<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
+If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
+casting behavior in mixed precision should be handled manually.</p></li>
+<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
+<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
+TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
+positional and keyword arguments.</p></li>
+</ul>
+</dd>
+<dt><a href="#id9"><span class="problematic" id="id10">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
+</dd>
+<dt><a href="#id11"><span class="problematic" id="id12">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
+The following optional keyword arguments are reserved:
+- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
+<blockquote>
+<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
+<cite>mask</cite> argument, its default value will be set to the mask generated
+for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
+that generated a corresponding mask, i.e. if it came from a Keras
+layer with masking support).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionSamples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to extract the mean of a distribution</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
+dist = distLayer(distParams)
+mean = mm.layers.DistributionMean()(dist)
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.call" title="Permalink to this definition"></a></dt>
+<dd><p>This is where the layer’s logic lives.</p>
+<p>The <cite>call()</cite> method may not create state (except in its first invocation,
+wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
+It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
+that is called automatically before <cite>call()</cite> executes the first time.</p>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
+- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
+<blockquote>
+<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
+of a keyword argument.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
+<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
+<li><p>Layers are built (<cite>build(input_shape)</cite> method)
+using shape info from <cite>inputs</cite> only.</p></li>
+<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
+<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
+If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
+casting behavior in mixed precision should be handled manually.</p></li>
+<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
+<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
+TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
+positional and keyword arguments.</p></li>
+</ul>
+</dd>
+<dt><a href="#id13"><span class="problematic" id="id14">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
+</dd>
+<dt><a href="#id15"><span class="problematic" id="id16">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
+The following optional keyword arguments are reserved:
+- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
+<blockquote>
+<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
+<cite>mask</cite> argument, its default value will be set to the mask generated
+for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
+that generated a corresponding mask, i.e. if it came from a Keras
+layer with masking support).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the configuration of the layer.</p>
+<p>A layer config is a Python dictionary (serializable) containing
+the configuration of a layer. The same layer can be reinstantiated
+later (without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity information,
+nor the layer class name. These are handled by Network (one layer
+of abstraction above).</p>
+<p>Note that get_config() does not guarantee to return a fresh copy
+of dict every time it is called. The callers should make a copy
+of the returned dict if they want to modify it.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>samples</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>outDim</em><em>]</em>) – Sample <cite>tf.Tensor</cite> of the output distribution</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Python dictionary.</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A typical loss for mixture mapping.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tf.Tensor</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -422,7 +626,7 @@ the first execution of <cite>call()</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.linearmapping.LinearMapping.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.linearmapping.LinearMapping.call" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.linearmapping.LinearMapping.call" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the output distribution layer based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl class="simple">
 <dt>Parameters:</dt><dd><dl class="simple">
@@ -500,15 +704,15 @@ and output distributions is free and general</p>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">newDist</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id5">
-<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id17">
+<h2>Parameters<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>regularize_cov_epsilon<span class="classifier">python float</span></dt><dd><p>if not None cov matrix corelation is restricted (eg. 0.995)</p>
 </dd>
 </dl>
 </section>
-<section id="id6">
-<h2>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<section id="id18">
+<h2>Returns<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -543,7 +747,7 @@ the first execution of <cite>call()</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.generalmapping.GeneralMapping.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.generalmapping.GeneralMapping.call" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.generalmapping.GeneralMapping.call" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the output distribution layer based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl>
 <dt>Parameters:</dt><dd><dl>
@@ -622,7 +826,7 @@ be the same dimension as the event_shape of the distribution.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the binned distribution of a tfp.distributions.Distribution</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -686,8 +890,8 @@ instead of an integer.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<section id="id7">
-<h2>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<section id="id19">
+<h2>Parameters<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>output_indices<span class="classifier">array </span></dt><dd><p>Array of the indices in the following distribution, which will server as output</p>
 </dd>
@@ -702,8 +906,8 @@ shape: [mix]</p>
 </dd>
 </dl>
 </section>
-<section id="id8">
-<h2>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<section id="id20">
+<h2>Returns<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -720,8 +924,8 @@ shape: [mix]</p>
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.ConstGMR.set_gmm">
 <span class="sig-name descname"><span class="pre">set_gmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.ConstGMR.set_gmm" title="Permalink to this definition"></a></dt>
 <dd><p>Set the initial GMM parameters</p>
-<section id="id9">
-<h3>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<section id="id21">
+<h3>Parameters<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
 shape: [mix, inDim]</p>
@@ -768,8 +972,8 @@ In a further step the model can be also trained on samples.</p>
 <span class="n">sample_loss</span> <span class="o">=</span> <span class="n">distLayer</span><span class="o">.</span><span class="n">sample_loss</span><span class="p">(</span><span class="n">inTsamples</span><span class="p">)</span>  
 </pre></div>
 </div>
-<section id="id10">
-<h2>Parameters<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<section id="id22">
+<h2>Parameters<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>output_indices<span class="classifier">array </span></dt><dd><p>Array of the indices in the following distribution, which will server as output</p>
 </dd>
@@ -784,8 +988,8 @@ shape: [mix]</p>
 </dd>
 </dl>
 </section>
-<section id="id11">
-<h2>Returns<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<section id="id23">
+<h2>Returns<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -802,8 +1006,8 @@ shape: [mix]</p>
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm">
 <span class="sig-name descname"><span class="pre">set_gmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm" title="Permalink to this definition"></a></dt>
 <dd><p>Set the initial GMM parameters</p>
-<section id="id12">
-<h3>Parameters<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<section id="id24">
+<h3>Parameters<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
 shape: [mix, inDim]</p>
@@ -822,8 +1026,8 @@ shape: [mix]</p>
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values">
 <span class="sig-name descname"><span class="pre">set_gmm_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values" title="Permalink to this definition"></a></dt>
 <dd><p>Set the GMM parameters without creating new tensorflow operations</p>
-<section id="id13">
-<h3>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<section id="id25">
+<h3>Parameters<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
 shape: [mix, inDim]</p>
