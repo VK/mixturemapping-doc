@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basic &mdash; Mixture Mapping alpha documentation</title>
+  <title>Distribution &mdash; Mixture Mapping alpha documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/mixturemapping.css" type="text/css" />
@@ -32,7 +32,7 @@
             <a href="index.html" class="icon icon-home"> Mixture Mapping
           </a>
               <div class="version">
-                0.0
+                0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,26 +45,26 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="mixturemapping.html">Mixture Mapping</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="mixturemapping.html#layers">Layers</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Basic</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Distribution</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.Distribution"><code class="docutils literal notranslate"><span class="pre">Distribution</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionMean"><code class="docutils literal notranslate"><span class="pre">DistributionMean</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionSampleLoss"><code class="docutils literal notranslate"><span class="pre">DistributionSampleLoss</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionSamples"><code class="docutils literal notranslate"><span class="pre">DistributionSamples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">Mapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">Mixture Mapping</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.linearmapping.LinearMapping"><code class="docutils literal notranslate"><span class="pre">LinearMapping</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.generalmapping.GeneralMapping"><code class="docutils literal notranslate"><span class="pre">GeneralMapping</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">Binning</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.gmrmapping">Gaussian Mixtures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.gmrmapping">Gaussian Mixture Regression</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.gmrmapping.ConstGMR"><code class="docutils literal notranslate"><span class="pre">ConstGMR</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.gmrmapping.DynamicGMR"><code class="docutils literal notranslate"><span class="pre">DynamicGMR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">Binning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -91,7 +91,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="mixturemapping.html">Mixture Mapping</a></li>
-      <li class="breadcrumb-item active">Basic</li>
+      <li class="breadcrumb-item active">Distribution</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/mixturemapping.layers.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -101,9 +101,225 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-mixturemapping.layers.covmatrix">
-<span id="basic"></span><h1>Basic<a class="headerlink" href="#module-mixturemapping.layers.covmatrix" title="Permalink to this heading"></a></h1>
+  <section id="module-mixturemapping.layers.distribution">
+<span id="distribution"></span><h1>Distribution<a class="headerlink" href="#module-mixturemapping.layers.distribution" title="Permalink to this heading"></a></h1>
 <dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer with a gaussian mixture distribution.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
+dist = distLayer(distParams)
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>regularize_cov_epsilon</strong> (<em>float</em>) – Strength of the regularization of
+the covarainz matrix. Without regularization, the matrices
+can become  non-invertible.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.call" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a Gaussian mixture distribution based
+on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>means</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>]</em>) – Means <cite>tf.Tensor</cite> of the mixture distribution</p></li>
+<li><p><strong>covariances</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>, </em><em>inDim</em><em>]</em>) – Cov Matrix Tensor of the mixture distribution</p></li>
+<li><p><strong>weights</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>]</em>) – Weight <cite>tf.Tensor</cite> ot the mixture components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The gaussian mixture distribution</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tfp.distributions.Distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>If the layer has not been built, this method will call build on
+the layer. This assumes that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
+shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output shape tuple.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionMean">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionMean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to extract the mean of a distribution</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
+dist = distLayer(distParams)
+
+mean = mm.layers.DistributionMean()(dist)
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionMean.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a sample based loss and add it to the model loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – Distribution</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>means</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSampleLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionSampleLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to compute the distribution loss</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
+dist = distLayer(distParams)
+
+lossdist = mm.layers.DistributionSampleLoss()({&quot;dist&quot;: dist, &quot;samples&quot;: inTsamples})
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSampleLoss.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a sample based loss and add it to the model loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> – Distribution</p></li>
+<li><p><strong>sample</strong> – Samplepoints</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>distribution</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionSamples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to compute distribution samples</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution()
+dist = distLayer(distParams)
+
+sampleLayer = mm.layers.DistributionSamples(1000)(dist)
+samples = sampleLayer(dist)
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute samples for a mixture distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – Distribution</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>sample points</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-mixturemapping.layers.covmatrix"></span><dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.TrainableCovMatrix">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TrainableCovMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
@@ -231,223 +447,9 @@ if they want to modify it.</p>
 
 </dd></dl>
 
-<span class="target" id="module-mixturemapping.layers.distribution"></span><dl class="py class">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
-<p>Create a keras layer with a gaussian mixture distribution.</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
-distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
-dist = distLayer(distParams)
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>regularize_cov_epsilon</strong> (<em>float</em>) – Strength of the regularization of
-the covarainz matrix. Without regularization, the matrices
-can become  non-invertible.</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.build">
-<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.build" title="Permalink to this definition"></a></dt>
-<dd><p>Creates the the dist layer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input_shapes</strong> (<em>dict inputs</em>) – <p>???</p>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.call" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs a Gaussian mixture distribution based
-on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>means</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>]</em>) – Means <cite>tf.Tensor</cite> of the mixture distribution</p></li>
-<li><p><strong>covariances</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>, </em><em>inDim</em><em>]</em>) – Cov Matrix Tensor of the mixture distribution</p></li>
-<li><p><strong>weights</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>]</em>) – Weight <cite>tf.Tensor</cite> ot the mixture components</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The gaussian mixture distribution</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tfp.distributions.Distribution</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.compute_output_shape">
-<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.compute_output_shape" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the output shape of the layer.</p>
-<p>If the layer has not been built, this method will call build on
-the layer. This assumes that the layer will later be used with
-inputs that match the input shape provided here.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
-shape tuples (one per output tensor of the layer).
-Shape tuples can include None for free dimensions,
-instead of an integer.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The output shape tuple.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.Distribution.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.Distribution.get_config" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the configuration of the layer.</p>
-<p>A layer config is a Python dictionary (serializable) containing
-the configuration of a layer. The same layer can be reinstantiated
-later (without its trained weights) from this configuration.</p>
-<p>The config of a layer does not include connectivity information,
-nor the layer class name. These are handled by Network (one layer
-of abstraction above).</p>
-<p>Note that get_config() does not guarantee to return a fresh copy
-of dict every time it is called. The callers should make a copy
-of the returned dict if they want to modify it.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Python dictionary.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionMean">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionMean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
-<p>Create a keras layer to extract the mean of a distribution</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
-distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
-dist = distLayer(distParams)
-
-mean = mm.layers.DistributionMean()(dist)
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionMean.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean.call" title="Permalink to this definition"></a></dt>
-<dd><p>Compute a sample based loss and add it to the model loss</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> – Distribution</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>means</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSampleLoss">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionSampleLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
-<p>Create a keras layer to compute the distribution loss</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
-distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
-dist = distLayer(distParams)
-
-lossdist = mm.layers.DistributionSampleLoss()({&quot;dist&quot;: dist, &quot;samples&quot;: inTsamples})
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSampleLoss.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss.call" title="Permalink to this definition"></a></dt>
-<dd><p>Compute a sample based loss and add it to the model loss</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dist</strong> – Distribution</p></li>
-<li><p><strong>sample</strong> – Samplepoints</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>distribution</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionSamples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
-<p>Create a keras layer to compute distribution samples</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
-distLayer = mm.layers.Distribution()
-dist = distLayer(distParams)
-
-sampleLayer = mm.layers.DistributionSamples(1000)(dist)
-samples = sampleLayer(dist)
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.call" title="Permalink to this definition"></a></dt>
-<dd><p>Compute samples for a mixture distribution</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> – Distribution</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>sample points</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionSamples.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.get_config" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the configuration of the layer.</p>
-<p>A layer config is a Python dictionary (serializable) containing
-the configuration of a layer. The same layer can be reinstantiated
-later (without its trained weights) from this configuration.</p>
-<p>The config of a layer does not include connectivity information,
-nor the layer class name. These are handled by Network (one layer
-of abstraction above).</p>
-<p>Note that get_config() does not guarantee to return a fresh copy
-of dict every time it is called. The callers should make a copy
-of the returned dict if they want to modify it.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Python dictionary.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="module-mixturemapping.layers.linearmapping">
-<span id="mapping"></span><h1>Mapping<a class="headerlink" href="#module-mixturemapping.layers.linearmapping" title="Permalink to this heading"></a></h1>
+<span id="mixture-mapping"></span><h1>Mixture Mapping<a class="headerlink" href="#module-mixturemapping.layers.linearmapping" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.linearmapping.LinearMapping">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LinearMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.linearmapping.LinearMapping" title="Permalink to this definition"></a></dt>
@@ -561,6 +563,19 @@ shape: [batch, mix]</p>
 <p>A free general mapping layer, that maps centers and distributions independently.</p>
 <p>This layers can be used if the relationship between input distributions
 and output distributions is free and general</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>yModel<span class="classifier">Keras Model</span></dt><dd><p>Keras Model that maps the means tensor to the output tensor
+input: [batch, mix, inDim]
+output: [batch, mix, outDim]</p>
+</dd>
+<dt>yDeltaModel<span class="classifier">KerasModel</span></dt><dd><p>Keras Model that maps the means tensor the the output uncertainty
+input: [batch, mix, inDim]
+output: [batch, mix, outDim]</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -584,8 +599,8 @@ and output distributions is free and general</p>
 <span class="n">covALayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">TrainableCovMatrix</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CovA&quot;</span><span class="p">)</span>
 <span class="n">covA</span> <span class="o">=</span> <span class="n">covALayer</span><span class="p">(</span><span class="n">inMeans</span><span class="p">)</span>
 
-<span class="n">mapLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GeneralMapping</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mapping&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
-<span class="n">newDist</span> <span class="o">=</span> <span class="n">mapLayer</span><span class="p">({</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;yDelta&#39;</span><span class="p">:</span><span class="n">yDelta</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">,</span> <span class="s1">&#39;covA&#39;</span><span class="p">:</span> <span class="n">covA</span><span class="p">})</span>
+<span class="n">mapLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GeneralMapping</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mapping&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">,</span> <span class="n">yModel</span><span class="o">=</span><span class="n">mapModel</span><span class="p">,</span> <span class="n">yDeltaModel</span><span class="o">=</span><span class="n">yDeltaModel</span><span class="p">)</span>
+<span class="n">newDist</span> <span class="o">=</span> <span class="n">mapLayer</span><span class="p">({</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">,</span> <span class="s1">&#39;covA&#39;</span><span class="p">:</span> <span class="n">covA</span><span class="p">})</span>
 
 <span class="n">distLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Distribution</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">,</span> <span class="n">regularize_cov_epsilon</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">newDist</span><span class="p">)</span>
@@ -650,14 +665,6 @@ shape: [batch, mix, inDim, inDim]</p>
 <dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
 shape: [batch, mix]</p>
 </dd>
-<dt>yModel<span class="classifier">Keras Model</span></dt><dd><p>Keras Model that maps the means tensor to the output tensor
-input: [batch, mix, inDim]
-output: [batch, mix, outDim]</p>
-</dd>
-<dt>yDeltaModel<span class="classifier">KerasModel</span></dt><dd><p>Keras Model that maps the means tensor the the output uncertainty
-input: [batch, mix, inDim]
-output: [batch, mix, outDim]</p>
-</dd>
 <dt>covA: Instance of <cite>tf.Tensor</cite> [optional]</dt><dd><p>Optional Covariance Matrix to increase distribution spread
 shape: [batch, mix, outDim, outDim] if effect is mixture dependent
 shape: [batch, outDim, outDim] if effect is mixture independent</p>
@@ -683,81 +690,32 @@ shape: [batch, mix]</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.generalmapping.GeneralMapping.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.generalmapping.GeneralMapping.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-</dd></dl>
-
-</section>
-<section id="module-mixturemapping.layers.binyield">
-<span id="binning"></span><h1>Binning<a class="headerlink" href="#module-mixturemapping.layers.binyield" title="Permalink to this heading"></a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinYield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
-<p>Create a keras layer to compute the bin yield.</p>
-<p>We use sample points to define the bin structure. Each of the <cite>binN</cite>
-bins has <cite>sampleN</cite> sample points with <cite>outN</cite> values. <cite>outN</cite> must 
-be the same dimension as the event_shape of the distribution.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>scheme</strong> (<a class="reference internal" href="mixturemapping.html#mixturemapping.binning.BinningScheme" title="mixturemapping.binning.BinningScheme"><em>binning.BinningScheme</em></a>) – The binning scheme we want to apply</p>
-</dd>
-</dl>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Binyield</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-<span class="k">yield</span> <span class="o">=</span> <span class="n">binLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.build">
-<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.build" title="Permalink to this definition"></a></dt>
-<dd><p>Creates the the dist layer.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the binned distribution of a tfp.distributions.Distribution</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tfp.distributions</em><em> [</em><em>batch</em><em>, </em><em>outN</em><em>]</em>) – The distribution</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The binning result as a tensor</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tf.Tensor (shape=[batch, binN])</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.compute_output_shape">
-<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.compute_output_shape" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the output shape of the layer.</p>
-<p>If the layer has not been built, this method will call build on
-the layer. This assumes that the layer will later be used with
-inputs that match the input shape provided here.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
-shape tuples (one per output tensor of the layer).
-Shape tuples can include None for free dimensions,
-instead of an integer.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The output shape tuple.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
 <section id="module-mixturemapping.layers.gmrmapping">
-<span id="gaussian-mixtures"></span><h1>Gaussian Mixtures<a class="headerlink" href="#module-mixturemapping.layers.gmrmapping" title="Permalink to this heading"></a></h1>
+<span id="gaussian-mixture-regression"></span><h1>Gaussian Mixture Regression<a class="headerlink" href="#module-mixturemapping.layers.gmrmapping" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.ConstGMR">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConstGMR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.ConstGMR" title="Permalink to this definition"></a></dt>
@@ -932,6 +890,89 @@ shape: [mix]</p>
 </dd></dl>
 
 </section>
+</dd></dl>
+
+</section>
+<section id="module-mixturemapping.layers.binyield">
+<span id="binning"></span><h1>Binning<a class="headerlink" href="#module-mixturemapping.layers.binyield" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinYield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to compute the bin yield.</p>
+<p>We use sample points to define the bin structure. Each of the <cite>binN</cite>
+bins has <cite>sampleN</cite> sample points with <cite>outN</cite> values. <cite>outN</cite> must 
+be the same dimension as the event_shape of the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scheme</strong> (<a class="reference internal" href="mixturemapping.html#mixturemapping.binning.BinningScheme" title="mixturemapping.binning.BinningScheme"><em>binning.BinningScheme</em></a>) – The binning scheme we want to apply</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Binyield</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="k">yield</span> <span class="o">=</span> <span class="n">binLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the binned distribution of a tfp.distributions.Distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tfp.distributions</em><em> [</em><em>batch</em><em>, </em><em>outN</em><em>]</em>) – The distribution</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The binning result as a tensor</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tf.Tensor (shape=[batch, binN])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>If the layer has not been built, this method will call build on
+the layer. This assumes that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
+shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output shape tuple.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>

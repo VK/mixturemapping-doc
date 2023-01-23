@@ -1,18 +1,17 @@
-
-Basic
-------------------
-.. automodule:: mixturemapping.layers.covmatrix
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+Distribution
+--------------
 .. automodule:: mixturemapping.layers.distribution
    :members:
    :undoc-members:
    :show-inheritance:   
 
-   
-Mapping
+.. automodule:: mixturemapping.layers.covmatrix
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Mixture Mapping
 ------------------
 .. automodule:: mixturemapping.layers.linearmapping
    :members:
@@ -26,18 +25,18 @@ Mapping
    :show-inheritance:
 
 
+Gaussian Mixture Regression
+----------------------------
+.. automodule:: mixturemapping.layers.gmrmapping
+   :members:
+   :undoc-members:
+   :show-inheritance:   
+
+
+
 Binning
 -------------
 .. automodule:: mixturemapping.layers.binyield
    :members:
    :undoc-members:
    :show-inheritance:   
-
-
-Gaussian Mixtures
-------------------
-.. automodule:: mixturemapping.layers.gmrmapping
-   :members:
-   :undoc-members:
-   :show-inheritance:   
-
