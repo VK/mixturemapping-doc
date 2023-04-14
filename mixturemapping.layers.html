@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Distribution &mdash; Mixture Mapping alpha documentation</title>
@@ -29,14 +29,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mixture Mapping
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mixture Mapping
           </a>
               <div class="version">
                 0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -89,7 +93,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="mixturemapping.html">Mixture Mapping</a></li>
       <li class="breadcrumb-item active">Distribution</li>
       <li class="wy-breadcrumbs-aside">
@@ -115,7 +119,7 @@ dist = distLayer(distParams)
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>regularize_cov_epsilon</strong> (<em>float</em>) – Strength of the regularization of
 the covarainz matrix. Without regularization, the matrices
 can become  non-invertible.</p>
@@ -147,17 +151,17 @@ the first execution of <cite>call()</cite>.</p>
 <dd><p>Constructs a Gaussian mixture distribution based
 on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>means</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>]</em>) – Means <cite>tf.Tensor</cite> of the mixture distribution</p></li>
 <li><p><strong>covariances</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>, </em><em>inDim</em><em>, </em><em>inDim</em><em>]</em>) – Cov Matrix Tensor of the mixture distribution</p></li>
 <li><p><strong>weights</strong> (<em>tf.Tensor</em><em> [</em><em>batch</em><em>, </em><em>mix</em><em>]</em>) – Weight <cite>tf.Tensor</cite> ot the mixture components</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The gaussian mixture distribution</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tfp.distributions.Distribution</p>
 </dd>
 </dl>
@@ -171,16 +175,16 @@ on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
 the layer. This assumes that the layer will later be used with
 inputs that match the input shape provided here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
 shape tuples (one per output tensor of the layer).
 Shape tuples can include None for free dimensions,
 instead of an integer.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The output shape tuple.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
@@ -226,10 +230,10 @@ mean = mm.layers.DistributionMean()(dist)
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionMean.call" title="Permalink to this definition"></a></dt>
 <dd><p>Compute a sample based loss and add it to the model loss</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>x</strong> – Distribution</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>means</p>
 </dd>
 </dl>
@@ -255,13 +259,13 @@ lossdist = mm.layers.DistributionSampleLoss()({&quot;dist&quot;: dist, &quot;sam
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSampleLoss.call" title="Permalink to this definition"></a></dt>
 <dd><p>Compute a sample based loss and add it to the model loss</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dist</strong> – Distribution</p></li>
 <li><p><strong>sample</strong> – Samplepoints</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>distribution</p>
 </dd>
 </dl>
@@ -288,10 +292,10 @@ samples = sampleLayer(dist)
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionSamples.call" title="Permalink to this definition"></a></dt>
 <dd><p>Compute samples for a mixture distribution</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>x</strong> – Distribution</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>sample points</p>
 </dd>
 </dl>
@@ -904,7 +908,7 @@ shape: [mix]</p>
 bins has <cite>sampleN</cite> sample points with <cite>outN</cite> values. <cite>outN</cite> must 
 be the same dimension as the event_shape of the distribution.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>scheme</strong> (<a class="reference internal" href="mixturemapping.html#mixturemapping.binning.BinningScheme" title="mixturemapping.binning.BinningScheme"><em>binning.BinningScheme</em></a>) – The binning scheme we want to apply</p>
 </dd>
 </dl>
@@ -938,13 +942,13 @@ the first execution of <cite>call()</cite>.</p>
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the binned distribution of a tfp.distributions.Distribution</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>x</strong> (<em>tfp.distributions</em><em> [</em><em>batch</em><em>, </em><em>outN</em><em>]</em>) – The distribution</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The binning result as a tensor</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tf.Tensor (shape=[batch, binN])</p>
 </dd>
 </dl>
@@ -958,16 +962,16 @@ the first execution of <cite>call()</cite>.</p>
 the layer. This assumes that the layer will later be used with
 inputs that match the input shape provided here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>input_shape</strong> – Shape tuple (tuple of integers) or list of
 shape tuples (one per output tensor of the layer).
 Shape tuples can include None for free dimensions,
 instead of an integer.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The output shape tuple.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
