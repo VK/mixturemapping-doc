@@ -69,6 +69,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">Binning</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYieldStatic"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -913,8 +914,13 @@ be the same dimension as the event_shape of the distribution.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Binyield</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
-<span class="k">yield</span> <span class="o">=</span> <span class="n">binLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BinYield</span><span class="p">()</span>
+<span class="k">yield</span> <span class="o">=</span> <span class="n">binLayer</span><span class="p">({</span>
+    <span class="s2">&quot;means&quot;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span>
+    <span class="s2">&quot;covariances&quot;</span><span class="p">:</span> <span class="n">inCovs</span><span class="p">,</span>
+    <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">scheme</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="p">})</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -940,23 +946,78 @@ the first execution of <cite>call()</cite>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.call" title="Permalink to this definition"></a></dt>
-<dd><p>Calculate the binned distribution of a tfp.distributions.Distribution</p>
+<dd><p>Calculate the binned distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The binning result as a tensor</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tf.Tensor (shape=[batch, binN])</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYieldStatic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BinYieldStatic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYieldStatic" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to compute the bin yield.</p>
+<p>We use sample points to define the bin structure. Each of the <cite>binN</cite>
+bins has <cite>sampleN</cite> sample points with <cite>outN</cite> values. <cite>outN</cite> must 
+be the same dimension as the event_shape of the distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tfp.distributions</em><em> [</em><em>batch</em><em>, </em><em>outN</em><em>]</em>) – The distribution</p>
+<dd class="field-odd"><p><strong>scheme</strong> (<a class="reference internal" href="mixturemapping.html#mixturemapping.binning.BinningScheme" title="mixturemapping.binning.BinningScheme"><em>binning.BinningScheme</em></a>) – The binning scheme we want to apply</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The binning result as a tensor</p>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">binLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BinYieldStatic</span><span class="p">(</span><span class="n">scheme</span><span class="p">)</span>
+<span class="k">yield</span> <span class="o">=</span> <span class="n">binLayer</span><span class="p">({</span>
+    <span class="s2">&quot;means&quot;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span>
+    <span class="s2">&quot;covariances&quot;</span><span class="p">:</span> <span class="n">inCovs</span><span class="p">,</span>
+    <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">inWeight</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYieldStatic.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYieldStatic.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tf.Tensor (shape=[batch, binN])</p>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYield.compute_output_shape">
-<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYield.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYieldStatic.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYieldStatic.call" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the binned distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The binning result as a tensor</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tf.Tensor (shape=[batch, binN])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.binyield.BinYieldStatic.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.binyield.BinYieldStatic.compute_output_shape" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the output shape of the layer.</p>
 <p>If the layer has not been built, this method will call build on
 the layer. This assumes that the layer will later be used with
