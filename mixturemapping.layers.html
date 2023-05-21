@@ -36,7 +36,7 @@
             Mixture Mapping
           </a>
               <div class="version">
-                0.3
+                0.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -51,10 +51,12 @@
 <li class="toctree-l2 current"><a class="reference internal" href="mixturemapping.html#layers">Layers</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Distribution</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.Distribution"><code class="docutils literal notranslate"><span class="pre">Distribution</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionKLLoss"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionMean"><code class="docutils literal notranslate"><span class="pre">DistributionMean</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionSampleLoss"><code class="docutils literal notranslate"><span class="pre">DistributionSampleLoss</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.distribution.DistributionSamples"><code class="docutils literal notranslate"><span class="pre">DistributionSamples</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.covmatrix.VarCovMatrix"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.linearmapping">Mixture Mapping</a><ul>
@@ -63,13 +65,24 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.gmrmapping">Gaussian Mixture Regression</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.gmrmapping.ConstGMR"><code class="docutils literal notranslate"><span class="pre">ConstGMR</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.gmrmapping.DynamicGMR"><code class="docutils literal notranslate"><span class="pre">DynamicGMR</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.binyield">Binning</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYield"><code class="docutils literal notranslate"><span class="pre">BinYield</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.binyield.BinYieldStatic"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.normalization">Normalization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.normalization.FixedBackward"><code class="docutils literal notranslate"><span class="pre">FixedBackward</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.normalization.FixedForward"><code class="docutils literal notranslate"><span class="pre">FixedForward</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-mixturemapping.layers.disttrafo">Distribution Trafos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.disttrafo.AppendCatAsFloat"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.disttrafo.CatTrainableOffset"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.disttrafo.CatTrainableScale"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mixturemapping.layers.disttrafo.DistMerger"><code class="docutils literal notranslate"><span class="pre">DistMerger</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -207,6 +220,60 @@ every time it is called. The callers should make a copy of the returned dict
 if they want to modify it.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionKLLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistributionKLLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionKLLoss" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>Create a keras layer to KL divergence loss</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>distParams = {&quot;means&quot;: ???, &quot;covariances&quot;: ???, &quot;weights&quot;: ???}
+distLayer = mm.layers.Distribution(regularize_cov_epsilon=0.95)
+dist = distLayer(distParams)
+
+lossdist = mm.layers.DistributionKLLoss()({&quot;dist&quot;: dist, &quot;means&quot;: means, &quot;covariances&quot;: covs, &quot;weights&quot;: weights})
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionKLLoss.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionKLLoss.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionKLLoss.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionKLLoss.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a sample based KL divergence loss and add it to the model loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> – Distribution</p></li>
+<li><p><strong>means</strong> – Means of the ideal GMM</p></li>
+<li><p><strong>covariances</strong> – Covariances of the ideal GMM</p></li>
+<li><p><strong>weights</strong> – Weights of the ideal GMM</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distribution</p>
 </dd>
 </dl>
 </dd></dl>
@@ -452,13 +519,141 @@ if they want to modify it.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VarCovMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.VarCovMatrix" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_M</span></code></p>
+<p>Generates an variational covariance matrix</p>
+<p>Important symmetry properties are generated automatically because the covariance matrix
+is built up from standard deviations <cite>VarCovMatrix.spread</cite>
+and correlations <cite>VarCovMatrix.corr</cite>.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>output</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.VarCovMatrix.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.VarCovMatrix.call" title="Permalink to this definition"></a></dt>
+<dd><p>This is where the layer’s logic lives.</p>
+<p>The <cite>call()</cite> method may not create state (except in its first invocation,
+wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
+It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
+that is called automatically before <cite>call()</cite> executes the first time.</p>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
+- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
+<blockquote>
+<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
+of a keyword argument.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
+<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
+<li><p>Layers are built (<cite>build(input_shape)</cite> method)
+using shape info from <cite>inputs</cite> only.</p></li>
+<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
+<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
+If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
+casting behavior in mixed precision should be handled manually.</p></li>
+<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
+<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
+TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
+positional and keyword arguments.</p></li>
+</ul>
+</dd>
+<dt><a href="#id5"><span class="problematic" id="id6">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
+</dd>
+<dt><a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
+The following optional keyword arguments are reserved:
+- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
+<blockquote>
+<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
+<cite>mask</cite> argument, its default value will be set to the mask generated
+for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
+that generated a corresponding mask, i.e. if it came from a Keras
+layer with masking support).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.VarCovMatrix.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>This method will cause the layer’s state to be built, if that has not
+happened before. This requires that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>An input shape tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.VarCovMatrix.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-mixturemapping.layers.linearmapping">
 <span id="mixture-mapping"></span><h1>Mixture Mapping<a class="headerlink" href="#module-mixturemapping.layers.linearmapping" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.linearmapping.LinearMapping">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LinearMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.linearmapping.LinearMapping" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Mapping</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_M</span></code></p>
 <p>A free linear mapping layer, that maps centers and distributions independently.</p>
 <p>This layers can be used if the relationship between input distributions
 and output distributions is free and linear</p>
@@ -564,7 +759,7 @@ shape: [batch, mix]</p>
 <span class="target" id="module-mixturemapping.layers.generalmapping"></span><dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.generalmapping.GeneralMapping">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeneralMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.generalmapping.GeneralMapping" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_Mapping</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_M</span></code></p>
 <p>A free general mapping layer, that maps centers and distributions independently.</p>
 <p>This layers can be used if the relationship between input distributions
 and output distributions is free and general</p>
@@ -611,15 +806,15 @@ output: [batch, mix, outDim]</p>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">newDist</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id5">
-<h2>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<section id="id9">
+<h2>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>regularize_cov_epsilon<span class="classifier">python float</span></dt><dd><p>if not None cov matrix corelation is restricted (eg. 0.995)</p>
 </dd>
 </dl>
 </section>
-<section id="id6">
-<h2>Returns<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<section id="id10">
+<h2>Returns<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -722,98 +917,19 @@ if they want to modify it.</p>
 <section id="module-mixturemapping.layers.gmrmapping">
 <span id="gaussian-mixture-regression"></span><h1>Gaussian Mixture Regression<a class="headerlink" href="#module-mixturemapping.layers.gmrmapping" title="Permalink to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.ConstGMR">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConstGMR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.ConstGMR" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GMRmapping</span></code></p>
-<p>A constant mapping layer using gaussian mixtures.</p>
-<p>This layers can be used if a trained Gaussian mixture of the combined input and output coordinates are available.</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>
-<span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
-
-<span class="n">baseModel</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">baseModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">combinedSamples</span><span class="p">)</span>
-
-<span class="n">gmr</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">ConstGMR</span><span class="p">(</span>
-    <span class="n">output_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-    <span class="n">means</span><span class="o">=</span><span class="n">baseModel</span><span class="o">.</span><span class="n">means_</span><span class="p">,</span>
-    <span class="n">covariances</span><span class="o">=</span><span class="n">baseModel</span><span class="o">.</span><span class="n">covariances_</span><span class="p">,</span>
-    <span class="n">weights</span><span class="o">=</span><span class="n">baseModel</span><span class="o">.</span><span class="n">weights_</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<section id="id7">
-<h2>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
-<dl class="simple">
-<dt>output_indices<span class="classifier">array </span></dt><dd><p>Array of the indices in the following distribution, which will server as output</p>
-</dd>
-<dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
-shape: [mix, inDim]</p>
-</dd>
-<dt>covariances<span class="classifier">numpy array </span></dt><dd><p>Covariances array of the combined mixture distribution
-shape: [mix, inDim, inDim]</p>
-</dd>
-<dt>weights<span class="classifier">numpy array </span></dt><dd><p>Weights array of the combined mixture distribution
-shape: [mix]</p>
-</dd>
-</dl>
-</section>
-<section id="id8">
-<h2>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
-<dl class="simple">
-<dt>{</dt><dd><dl class="simple">
-<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
-</dd>
-<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
-</dd>
-<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<p>}</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.ConstGMR.set_gmm">
-<span class="sig-name descname"><span class="pre">set_gmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.ConstGMR.set_gmm" title="Permalink to this definition"></a></dt>
-<dd><p>Set the initial GMM parameters</p>
-<section id="id9">
-<h3>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
-<dl class="simple">
-<dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
-shape: [mix, inDim]</p>
-</dd>
-<dt>covariances<span class="classifier">numpy array </span></dt><dd><p>Covariances array of the combined mixture distribution
-shape: [mix, inDim, inDim]</p>
-</dd>
-<dt>weights<span class="classifier">numpy array </span></dt><dd><p>Weights array of the combined mixture distribution
-shape: [mix]</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-</section>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DynamicGMR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_GMRmapping</span></code></p>
-<p>A constant mapping layer using gaussian mixtures.</p>
-<p>This layers can be used if a trained Gaussian mixture of the combined input and output coordinates is available.
-In a further step the model can be also trained on samples.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_M</span></code></p>
+<p>A trainable mapping layer using gaussian mixtures.</p>
+<p>This layers can be used if an initial guess of a trained Gaussian mixture of the combined input and
+output coordinates is available.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>
-<span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
-
-<span class="n">baseModel</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">baseModel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">combinedSamples</span><span class="p">)</span>
 
 <span class="n">gmr</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">DynamicGMR</span><span class="p">(</span>
-    <span class="n">output_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-    <span class="n">means</span><span class="o">=</span><span class="n">baseModel</span><span class="o">.</span><span class="n">means_</span><span class="p">,</span>
-    <span class="n">covariances</span><span class="o">=</span><span class="n">baseModel</span><span class="o">.</span><span class="n">covariances_</span><span class="p">,</span>
-    <span class="n">weights</span><span class="o">=</span><span class="n">baseModel</span><span class="o">.</span><span class="n">weights_</span><span class="p">,</span>
+    <span class="n">output_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">input_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">mix_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">transformedDist</span> <span class="o">=</span> <span class="n">gmr</span><span class="p">({</span><span class="s2">&quot;means&quot;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s2">&quot;covariances&quot;</span><span class="p">:</span> <span class="n">cov</span><span class="p">,</span> <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">})</span>
@@ -824,24 +940,16 @@ In a further step the model can be also trained on samples.</p>
 <span class="n">sample_loss</span> <span class="o">=</span> <span class="n">distLayer</span><span class="o">.</span><span class="n">sample_loss</span><span class="p">(</span><span class="n">inTsamples</span><span class="p">)</span>  
 </pre></div>
 </div>
-<section id="id10">
-<h2>Parameters<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<section id="id11">
+<h2>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <dl class="simple">
-<dt>output_indices<span class="classifier">array </span></dt><dd><p>Array of the indices in the following distribution, which will server as output</p>
-</dd>
-<dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
-shape: [mix, inDim]</p>
-</dd>
-<dt>covariances<span class="classifier">numpy array </span></dt><dd><p>Covariances array of the combined mixture distribution
-shape: [mix, inDim, inDim]</p>
-</dd>
-<dt>weights<span class="classifier">numpy array </span></dt><dd><p>Weights array of the combined mixture distribution
-shape: [mix]</p>
+<dt>output_dim: int</dt><dd><p>size of the output dimension</p>
 </dd>
 </dl>
+<p>???</p>
 </section>
-<section id="id11">
-<h2>Returns<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<section id="id12">
+<h2>Returns<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -855,31 +963,107 @@ shape: [mix]</p>
 </dl>
 <p>}</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm">
-<span class="sig-name descname"><span class="pre">set_gmm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm" title="Permalink to this definition"></a></dt>
-<dd><p>Set the initial GMM parameters</p>
-<section id="id12">
-<h3>Parameters<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
 <dl class="simple">
-<dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
-shape: [mix, inDim]</p>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
 </dd>
-<dt>covariances<span class="classifier">numpy array </span></dt><dd><p>Covariances array of the combined mixture distribution
-shape: [mix, inDim, inDim]</p>
+</dl>
 </dd>
-<dt>weights<span class="classifier">numpy array </span></dt><dd><p>Weights array of the combined mixture distribution
-shape: [mix]</p>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the output distribution layer based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl>
+<dt>Parameters:</dt><dd><dl>
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Std Deviation <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>covariances<span class="classifier">Instance of <cite>tf.Tensor</cite></span></dt><dd><p>Cov Matrix Tensor of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, outDim]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, outDim, outDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms">
+<span class="sig-name descname"><span class="pre">fit_gmms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np_inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tf_inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_gmm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_gmm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms" title="Permalink to this definition"></a></dt>
+<dd><p>fit_gmms can be used to pretrain the internal gmm</p>
+<section id="id13">
+<h3>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>np_inputs:  dict of np.array</dt><dd><p>The numpy inputs needed to train the model</p>
+</dd>
+<dt>tf_inputs:  dict of input tensors</dt><dd><p>The inputs needed to compute the tensorflow model</p>
+</dd>
+<dt>input_gmm:  mixturemaping gmm</dt><dd><p>dict of means, covariances and weights to define the input gmm</p>
+</dd>
+<dt>output_gmm: mixturemaping gmm</dt><dd><p>dict of means, covariances and weights to define the output gmm</p>
+</dd>
+<dt>n_samples: int</dt><dd><p>number of sampels to model each input gmm</p>
 </dd>
 </dl>
 </section>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values">
 <span class="sig-name descname"><span class="pre">set_gmm_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values" title="Permalink to this definition"></a></dt>
 <dd><p>Set the GMM parameters without creating new tensorflow operations</p>
-<section id="id13">
-<h3>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<section id="id14">
+<h3>Parameters<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
 shape: [mix, inDim]</p>
@@ -1041,6 +1225,714 @@ instead of an integer.</p>
 </dd></dl>
 
 </section>
+<section id="module-mixturemapping.layers.normalization">
+<span id="normalization"></span><h1>Normalization<a class="headerlink" href="#module-mixturemapping.layers.normalization" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.normalization.FixedBackward">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FixedBackward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.normalization.FixedBackward" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_FixedBase</span></code></p>
+<p>A fixed normalization layer that applies the inverse normalization on a given GMM</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+
+
+<span class="n">dist_normalized</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">}</span>
+<span class="n">invNormalizationLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">normalization</span><span class="o">.</span><span class="n">FixedBackward</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">invNormalizationLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id15">
+<h2>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mean<span class="classifier">numpy array</span></dt><dd><p>Mean value used for the transformation
+shape: [inDim]</p>
+</dd>
+<dt>std<span class="classifier">numpy array</span></dt><dd><p>std deviation used for the transformation
+shape: [inDim]</p>
+</dd>
+<dt>samples<span class="classifier">numpy array</span></dt><dd><p>Feed in some samples to compute the fixed transformation
+shape: [batch, mix, inDim]</p>
+</dd>
+</dl>
+</section>
+<section id="id16">
+<h2>Returns<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>{</dt><dd><dl class="simple">
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+</dd>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+</dd>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.normalization.FixedBackward.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.normalization.FixedBackward.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a normalized distribution based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix  <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.normalization.FixedForward">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FixedForward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.normalization.FixedForward" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_FixedBase</span></code></p>
+<p>A fixed normalization layer that normalizes a GMM based on some samples given in the constructor</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+
+
+<span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">}</span>
+<span class="n">normalizationLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">normalization</span><span class="o">.</span><span class="n">FixedForward</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+
+<span class="n">dist_normalized</span> <span class="o">=</span> <span class="n">normalizationLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id17">
+<h2>Parameters<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>mean<span class="classifier">numpy array</span></dt><dd><p>Mean value used for the transformation
+shape: [inDim]</p>
+</dd>
+<dt>std<span class="classifier">numpy array</span></dt><dd><p>std deviation used for the transformation
+shape: [inDim]</p>
+</dd>
+<dt>samples<span class="classifier">numpy array</span></dt><dd><p>Feed in some samples to compute the fixed transformation
+shape: [batch, mix, inDim]</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h2>Returns<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>{</dt><dd><dl class="simple">
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+</dd>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+</dd>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.normalization.FixedForward.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.normalization.FixedForward.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a normalized distribution based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix  <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="module-mixturemapping.layers.disttrafo">
+<span id="distribution-trafos"></span><h1>Distribution Trafos<a class="headerlink" href="#module-mixturemapping.layers.disttrafo" title="Permalink to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.AppendCatAsFloat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AppendCatAsFloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.AppendCatAsFloat" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>A Layer that addes a categorical variable as single float to a distribution</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inCat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">}</span>
+<span class="n">normalizationLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">merger</span><span class="o">.</span><span class="n">AppendCatAsFloat</span><span class="p">([</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">])</span>
+
+<span class="n">dist_with_float</span> <span class="o">=</span> <span class="n">normalizationLayer</span><span class="p">(</span><span class="n">dist</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="n">inCat</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<section id="id19">
+<h2>Parameters<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>vocabulary<span class="classifier">list of strings</span></dt><dd><p>vocabulary for the string to float lookup</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h2>Returns<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>{</dt><dd><dl class="simple">
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+</dd>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+</dd>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.AppendCatAsFloat.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.AppendCatAsFloat.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.AppendCatAsFloat.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.AppendCatAsFloat.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a normalized distribution based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix  <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+<dt>cat: Instance of <cite>tf.Tensor</cite></dt><dd><p><cite>tf.Tensor</cite> with categorical values
+shape: [batch]</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim+1]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim+1, inDim+1]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.AppendCatAsFloat.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.AppendCatAsFloat.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>This method will cause the layer’s state to be built, if that has not
+happened before. This requires that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>An input shape tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.AppendCatAsFloat.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.AppendCatAsFloat.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableOffset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CatTrainableOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableOffset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_M</span></code></p>
+<p>A Layer that learns a distribution transformation based on a categorical input</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inCat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">}</span>
+<span class="n">transformLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">merger</span><span class="o">.</span><span class="n">CatTrainableOffset</span><span class="p">([</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">])</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">transformLayer</span><span class="p">(</span><span class="n">dist</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="n">inCat</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<section id="id21">
+<h2>Parameters<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>vocabulary<span class="classifier">list of strings</span></dt><dd><p>vocabulary for the string to float lookup</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h2>Returns<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>{</dt><dd><dl class="simple">
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+</dd>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+</dd>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableOffset.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableOffset.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableOffset.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableOffset.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a normalized distribution based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix  <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+<dt>cat: Instance of <cite>tf.Tensor</cite></dt><dd><p><cite>tf.Tensor</cite> with categorical values
+shape: [batch]</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim*len(vocabulary)]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim*len(vocabulary), inDim*len(vocabulary)]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableOffset.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableOffset.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>This method will cause the layer’s state to be built, if that has not
+happened before. This requires that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>An input shape tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableOffset.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableOffset.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableScale">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CatTrainableScale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableScale" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_M</span></code></p>
+<p>A Layer that learns a distribution transformation based on a categorical input</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inCat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">}</span>
+<span class="n">transformLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">merger</span><span class="o">.</span><span class="n">CatTrainableScale</span><span class="p">([</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">])</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">transformLayer</span><span class="p">(</span><span class="n">dist</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="n">inCat</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<section id="id23">
+<h2>Parameters<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>vocabulary<span class="classifier">list of strings</span></dt><dd><p>vocabulary for the string to float lookup</p>
+</dd>
+</dl>
+</section>
+<section id="id24">
+<h2>Returns<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>{</dt><dd><dl class="simple">
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+</dd>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+</dd>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableScale.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableScale.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableScale.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableScale.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a normalized distribution based on <cite>x</cite> (dict of <cite>tf.Tensors</cite>)</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>stdDevs: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix  <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+<dt>cat: Instance of <cite>tf.Tensor</cite></dt><dd><p><cite>tf.Tensor</cite> with categorical values
+shape: [batch]</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim*len(vocabulary)]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mix, inDim*len(vocabulary), inDim*len(vocabulary)]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableScale.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableScale.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>This method will cause the layer’s state to be built, if that has not
+happened before. This requires that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>An input shape tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.CatTrainableScale.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.CatTrainableScale.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the config of the layer.</p>
+<p>A layer config is a Python dictionary (serializable)
+containing the configuration of a layer.
+The same layer can be reinstantiated later
+(without its trained weights) from this configuration.</p>
+<p>The config of a layer does not include connectivity
+information, nor the layer class name. These are handled
+by <cite>Network</cite> (one layer of abstraction above).</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
+every time it is called. The callers should make a copy of the returned dict
+if they want to modify it.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Python dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.DistMerger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DistMerger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.DistMerger" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code></p>
+<p>A Layer that combines two mixture distributions</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">inMeansA</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN_A</span><span class="p">,</span> <span class="n">inputMixM_A</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MeansA&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inCovsA</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN_A</span><span class="p">,</span> <span class="n">inputMixM_A</span><span class="p">,</span> <span class="n">inputMix_M</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CovsA&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeightsA</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN_A</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;WeighsA&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+
+<span class="n">inMeansB</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN_B</span><span class="p">,</span> <span class="n">inputMixM_B</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MeansB&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inCovsB</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN_B</span><span class="p">,</span> <span class="n">inputMixM_B</span><span class="p">,</span> <span class="n">inputMixM_B</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CovsB&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+<span class="n">inWeightsB</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN_B</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;WeighsB&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
+
+<span class="n">distA</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeansA</span><span class="p">,</span> <span class="s1">&#39;covariances&#39;</span><span class="p">:</span> <span class="n">inCovsA</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeightsA</span><span class="p">}</span>
+<span class="n">distB</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeansB</span><span class="p">,</span> <span class="s1">&#39;covariances&#39;</span><span class="p">:</span> <span class="n">inCovsB</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeightsB</span><span class="p">}</span>
+
+<span class="n">mergeLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">merger</span><span class="o">.</span><span class="n">DistMerger</span><span class="p">()</span>
+
+<span class="n">combined_dist</span> <span class="o">=</span> <span class="n">mergeLayer</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">distA</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">distB</span><span class="p">})</span>
+</pre></div>
+</div>
+<section id="id25">
+<h2>Returns<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>{</dt><dd><dl class="simple">
+<dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
+</dd>
+<dt>“covariances”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Covariance matrices of the distributions</p>
+</dd>
+<dt>“weights”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Weights of the mixture components</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.DistMerger.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.DistMerger.build" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the variables of the layer (optional, for subclass implementers).</p>
+<p>This is a method that implementers of subclasses of <cite>Layer</cite> or <cite>Model</cite>
+can override if they need a state-creation step in-between
+layer instantiation and layer call. It is invoked automatically before
+the first execution of <cite>call()</cite>.</p>
+<p>This is typically used to create the weights of <cite>Layer</cite> subclasses
+(at the discretion of the subclass implementer).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Instance of <cite>TensorShape</cite>, or list of instances of</dt><dd><p><cite>TensorShape</cite> if the layer expects a list of inputs
+(one instance per input).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.DistMerger.call">
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.DistMerger.call" title="Permalink to this definition"></a></dt>
+<dd><p>Compute a combined distribution based on <cite>x</cite> (dict of distributions with keys A and B)</p>
+<dl>
+<dt>Parameters:</dt><dd><p>A:     dict of Gaussian Mixtures
+B:     dict of Gaussian Mixtures</p>
+<dl class="simple">
+<dt>Mixture:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix  <cite>tf.Tensor</cite> of the input mixture distribution
+shape: [batch, mix, inDim, inDim]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mix]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>means: Instance of <cite>tf.Tensor</cite></dt><dd><p>Means <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mixA * mixB, inDimA + inDimB]</p>
+</dd>
+<dt>covariances: Instance of <cite>tf.Tensor</cite></dt><dd><p>Covariance matrix <cite>tf.Tensor</cite> of the output mixture distribution
+shape: [batch, mixA * mixB, inDimA + inDimB, inDimA + inDimB]</p>
+</dd>
+<dt>weights: Instance of <cite>tf.Tensor</cite></dt><dd><p>Weight <cite>tf.Tensor</cite> ot the mixture components
+shape: [batch, mixA * mixB]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mixturemapping.layers.disttrafo.DistMerger.compute_output_shape">
+<span class="sig-name descname"><span class="pre">compute_output_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.disttrafo.DistMerger.compute_output_shape" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the output shape of the layer.</p>
+<p>This method will cause the layer’s state to be built, if that has not
+happened before. This requires that the layer will later be used with
+inputs that match the input shape provided here.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_shape: Shape tuple (tuple of integers)</dt><dd><p>or list of shape tuples (one per output tensor of the layer).
+Shape tuples can include None for free dimensions,
+instead of an integer.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>An input shape tuple.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
 
 
            </div>
@@ -1052,7 +1944,7 @@ instead of an integer.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Viktor Krückl (viktor@krueckl.de).</p>
+    <p>&#169; Copyright 2023, Viktor Krückl (viktor@krueckl.de).</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

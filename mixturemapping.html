@@ -37,7 +37,7 @@
             Mixture Mapping
           </a>
               <div class="version">
-                0.3
+                0.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,6 +54,8 @@
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">Mixture Mapping</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.gmrmapping">Gaussian Mixture Regression</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.binyield">Binning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.normalization">Normalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.disttrafo">Distribution Trafos</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-mixturemapping.distributions">Distributions</a><ul>
@@ -136,6 +138,11 @@
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.get_config"><code class="docutils literal notranslate"><span class="pre">Distribution.get_config()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss.build"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss.call"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss.call()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean"><code class="docutils literal notranslate"><span class="pre">DistributionMean</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean.call"><code class="docutils literal notranslate"><span class="pre">DistributionMean.call()</span></code></a></li>
 </ul>
@@ -156,6 +163,13 @@
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.get_config"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.get_config()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.build"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.call"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.compute_output_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.get_config"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.get_config()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">Mixture Mapping</a><ul>
@@ -173,12 +187,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.gmrmapping">Gaussian Mixture Regression</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR"><code class="docutils literal notranslate"><span class="pre">ConstGMR</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR.set_gmm"><code class="docutils literal notranslate"><span class="pre">ConstGMR.set_gmm()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR"><code class="docutils literal notranslate"><span class="pre">DynamicGMR</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.set_gmm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.build"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.call"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.fit_gmms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.get_config"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.get_config()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.set_gmm_values()</span></code></a></li>
 </ul>
 </li>
@@ -194,6 +207,47 @@
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.build"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic.build()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.call"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic.call()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic.compute_output_shape()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.normalization">Normalization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedBackward"><code class="docutils literal notranslate"><span class="pre">FixedBackward</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedBackward.call"><code class="docutils literal notranslate"><span class="pre">FixedBackward.call()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedForward"><code class="docutils literal notranslate"><span class="pre">FixedForward</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedForward.call"><code class="docutils literal notranslate"><span class="pre">FixedForward.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.disttrafo">Distribution Trafos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.build"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.call"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.compute_output_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.get_config"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.build"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.call"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.compute_output_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.get_config"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.build"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.call"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.compute_output_shape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.get_config"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger"><code class="docutils literal notranslate"><span class="pre">DistMerger</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.build"><code class="docutils literal notranslate"><span class="pre">DistMerger.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.call"><code class="docutils literal notranslate"><span class="pre">DistMerger.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">DistMerger.compute_output_shape()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -289,16 +343,17 @@ epsilon: correlation reduction (default:0.999)</p>
 <span id="utils"></span><h2>Utils<a class="headerlink" href="#module-mixturemapping.utils" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="mixturemapping.utils.getSkleanGM">
-<span class="sig-name descname"><span class="pre">getSkleanGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdDev</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.utils.getSkleanGM" title="Permalink to this definition"></a></dt>
-<dd><p>create a Gaussian Mixture Model from Sklearn based on weights, means and stdDev</p>
-<dl>
+<span class="sig-name descname"><span class="pre">getSkleanGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdOrCov</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.utils.getSkleanGM" title="Permalink to this definition"></a></dt>
+<dd><p>create a Gaussian Mixture Model from Sklearn based on weights, means and stdDev or covariances</p>
+<dl class="simple">
 <dt>Parameters:</dt><dd><dl class="simple">
-<dt>weights:  array-like, shape (n_components,)</dt><dd><p>The weights of each mixture components.</p>
+<dt>weights:      array-like, shape (n_components,)</dt><dd><p>The weights of each mixture components.</p>
 </dd>
-<dt>means:    array-like, shape (n_components, n_features)</dt><dd><p>The mean of each mixture component.</p>
+<dt>means:       array-like, shape (n_components, n_features)</dt><dd><p>The mean of each mixture component.</p>
+</dd>
+<dt>stdOrCov:    array-like, shape (n_components, n_features) or  (n_components, n_features, n_features)</dt><dd><p>The standard deviations or the covariaes of the mixture</p>
 </dd>
 </dl>
-<p>stdDev:   array-like</p>
 </dd>
 </dl>
 </dd></dl>
@@ -381,7 +436,7 @@ and an area weight</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="mixturemapping.binning.SingleBin">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SingleBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.SingleBin" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SingleBin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">area</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.binning.SingleBin" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>define a single bin as a Gaussian mixture with a
 diagonal covariance matrix</p>
@@ -408,7 +463,7 @@ diagonal covariance matrix</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mixturemapping.binning.SingleBin.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mixturemapping.binning.SingleBin.name" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -525,7 +580,7 @@ Parameters:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Viktor Krückl (viktor@krueckl.de).</p>
+    <p>&#169; Copyright 2023, Viktor Krückl (viktor@krueckl.de).</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -40,3 +40,19 @@ Binning
    :members:
    :undoc-members:
    :show-inheritance:   
+
+
+Normalization
+-------------
+.. automodule:: mixturemapping.layers.normalization
+   :members:
+   :undoc-members:
+   :show-inheritance:   
+
+
+Distribution Trafos
+--------------------
+.. automodule:: mixturemapping.layers.disttrafo
+   :members:
+   :undoc-members:
+   :show-inheritance:      

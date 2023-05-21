@@ -34,7 +34,7 @@
             Mixture Mapping
           </a>
               <div class="version">
-                0.3
+                0.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -80,6 +80,7 @@
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
@@ -88,6 +89,7 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
 </div>
@@ -95,6 +97,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mixturemapping.html#mixturemapping.binning.BinningScheme.append">append() (BinningScheme method)</a>
+</li>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat">AppendCatAsFloat (class in mixturemapping.layers.disttrafo)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -114,18 +118,32 @@
 </li>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic">BinYieldStatic (class in mixturemapping.layers.binyield)</a>
 </li>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.build">build() (BinYield method)</a>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.build">build() (AppendCatAsFloat method)</a>
 
       <ul>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.build">(BinYield method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.build">(BinYieldStatic method)</a>
 </li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.build">(CatTrainableOffset method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.build">(CatTrainableScale method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.build">(DistMerger method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.build">(Distribution method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss.build">(DistributionKLLoss method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.build">(DynamicGMR method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.build">(GeneralMapping method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.build">(LinearMapping method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.build">(TrainableCovMatrix method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.build">(VarCovMatrix method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -134,12 +152,22 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.call">call() (BinYield method)</a>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.call">call() (AppendCatAsFloat method)</a>
 
       <ul>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYield.call">(BinYield method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.call">(BinYieldStatic method)</a>
 </li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.call">(CatTrainableOffset method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.call">(CatTrainableScale method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.call">(DistMerger method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.call">(Distribution method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss.call">(DistributionKLLoss method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean.call">(DistributionMean method)</a>
 </li>
@@ -147,27 +175,47 @@
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionSamples.call">(DistributionSamples method)</a>
 </li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.call">(DynamicGMR method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedBackward.call">(FixedBackward method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedForward.call">(FixedForward method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.call">(GeneralMapping method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.linearmapping.LinearMapping.call">(LinearMapping method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.call">(TrainableCovMatrix method)</a>
 </li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.call">(VarCovMatrix method)</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset">CatTrainableOffset (class in mixturemapping.layers.disttrafo)</a>
+</li>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale">CatTrainableScale (class in mixturemapping.layers.disttrafo)</a>
+</li>
       <li><a href="mixturemapping.html#mixturemapping.binning.combine">combine() (in module mixturemapping.binning)</a>
 </li>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.compute_output_shape">compute_output_shape() (BinYieldStatic method)</a>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.compute_output_shape">compute_output_shape() (AppendCatAsFloat method)</a>
 
       <ul>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.compute_output_shape">(BinYieldStatic method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.compute_output_shape">(CatTrainableOffset method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.compute_output_shape">(CatTrainableScale method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.compute_output_shape">(DistMerger method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.compute_output_shape">(Distribution method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.compute_output_shape">(TrainableCovMatrix method)</a>
 </li>
-      </ul></li>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR">ConstGMR (class in mixturemapping.layers.gmrmapping)</a>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.compute_output_shape">(VarCovMatrix method)</a>
 </li>
+      </ul></li>
       <li><a href="mixturemapping.html#mixturemapping.binning.BinningScheme.covariances">covariances (BinningScheme property)</a>
 
       <ul>
@@ -186,12 +234,16 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger">DistMerger (class in mixturemapping.layers.disttrafo)</a>
+</li>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution">Distribution (class in mixturemapping.layers.distribution)</a>
 </li>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean">DistributionMean (class in mixturemapping.layers.distribution)</a>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss">DistributionKLLoss (class in mixturemapping.layers.distribution)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean">DistributionMean (class in mixturemapping.layers.distribution)</a>
+</li>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionSampleLoss">DistributionSampleLoss (class in mixturemapping.layers.distribution)</a>
 </li>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionSamples">DistributionSamples (class in mixturemapping.layers.distribution)</a>
@@ -209,19 +261,43 @@
   </ul></td>
 </tr></table>
 
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms">fit_gmms() (DynamicGMR method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedBackward">FixedBackward (class in mixturemapping.layers.normalization)</a>
+</li>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedForward">FixedForward (class in mixturemapping.layers.normalization)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping">GeneralMapping (class in mixturemapping.layers.generalmapping)</a>
 </li>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.get_config">get_config() (Distribution method)</a>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.get_config">get_config() (AppendCatAsFloat method)</a>
 
       <ul>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.get_config">(CatTrainableOffset method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.get_config">(CatTrainableScale method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.get_config">(Distribution method)</a>
+</li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionSamples.get_config">(DistributionSamples method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.get_config">(DynamicGMR method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.generalmapping.GeneralMapping.get_config">(GeneralMapping method)</a>
 </li>
         <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.get_config">(TrainableCovMatrix method)</a>
+</li>
+        <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.get_config">(VarCovMatrix method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -299,14 +375,19 @@
 </li>
       </ul></li>
       <li>
+    mixturemapping.layers.disttrafo
+
+      <ul>
+        <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.disttrafo">module</a>
+</li>
+      </ul></li>
+      <li>
     mixturemapping.layers.generalmapping
 
       <ul>
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     mixturemapping.layers.gmrmapping
 
@@ -314,11 +395,20 @@
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.gmrmapping">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     mixturemapping.layers.linearmapping
 
       <ul>
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">module</a>
+</li>
+      </ul></li>
+      <li>
+    mixturemapping.layers.normalization
+
+      <ul>
+        <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.normalization">module</a>
 </li>
       </ul></li>
       <li>
@@ -344,11 +434,15 @@
 </li>
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.distribution">mixturemapping.layers.distribution</a>
 </li>
+        <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.disttrafo">mixturemapping.layers.disttrafo</a>
+</li>
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.generalmapping">mixturemapping.layers.generalmapping</a>
 </li>
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.gmrmapping">mixturemapping.layers.gmrmapping</a>
 </li>
         <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">mixturemapping.layers.linearmapping</a>
+</li>
+        <li><a href="mixturemapping.layers.html#module-mixturemapping.layers.normalization">mixturemapping.layers.normalization</a>
 </li>
         <li><a href="mixturemapping.html#module-mixturemapping.utils">mixturemapping.utils</a>
 </li>
@@ -385,12 +479,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mixturemapping.html#mixturemapping.binning.SingleBin.sample">sample() (SingleBin method)</a>
 </li>
-      <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR.set_gmm">set_gmm() (ConstGMR method)</a>
-
-      <ul>
-        <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm">(DynamicGMR method)</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values">set_gmm_values() (DynamicGMR method)</a>
@@ -408,6 +496,14 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix">TrainableCovMatrix (class in mixturemapping.layers.covmatrix)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix">VarCovMatrix (class in mixturemapping.layers.covmatrix)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -433,7 +529,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Viktor Krückl (viktor@krueckl.de).</p>
+    <p>&#169; Copyright 2023, Viktor Krückl (viktor@krueckl.de).</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

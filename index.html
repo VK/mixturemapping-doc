@@ -36,7 +36,7 @@
             Mixture Mapping
           </a>
               <div class="version">
-                0.3
+                0.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -125,6 +125,11 @@
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.Distribution.get_config"><code class="docutils literal notranslate"><span class="pre">Distribution.get_config()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss.build"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionKLLoss.call"><code class="docutils literal notranslate"><span class="pre">DistributionKLLoss.call()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean"><code class="docutils literal notranslate"><span class="pre">DistributionMean</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.distribution.DistributionMean.call"><code class="docutils literal notranslate"><span class="pre">DistributionMean.call()</span></code></a></li>
 </ul>
@@ -145,6 +150,13 @@
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.TrainableCovMatrix.get_config"><code class="docutils literal notranslate"><span class="pre">TrainableCovMatrix.get_config()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.build"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.call"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.call()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.compute_output_shape()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.covmatrix.VarCovMatrix.get_config"><code class="docutils literal notranslate"><span class="pre">VarCovMatrix.get_config()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.linearmapping">Mixture Mapping</a><ul>
@@ -162,12 +174,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.gmrmapping">Gaussian Mixture Regression</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR"><code class="docutils literal notranslate"><span class="pre">ConstGMR</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.ConstGMR.set_gmm"><code class="docutils literal notranslate"><span class="pre">ConstGMR.set_gmm()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR"><code class="docutils literal notranslate"><span class="pre">DynamicGMR</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.set_gmm()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.build"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.call"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.call()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.fit_gmms()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.get_config"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.get_config()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values"><code class="docutils literal notranslate"><span class="pre">DynamicGMR.set_gmm_values()</span></code></a></li>
 </ul>
 </li>
@@ -183,6 +194,47 @@
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.build"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic.build()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.call"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic.call()</span></code></a></li>
 <li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.binyield.BinYieldStatic.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">BinYieldStatic.compute_output_shape()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.normalization">Normalization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedBackward"><code class="docutils literal notranslate"><span class="pre">FixedBackward</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedBackward.call"><code class="docutils literal notranslate"><span class="pre">FixedBackward.call()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedForward"><code class="docutils literal notranslate"><span class="pre">FixedForward</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.normalization.FixedForward.call"><code class="docutils literal notranslate"><span class="pre">FixedForward.call()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mixturemapping.layers.html#module-mixturemapping.layers.disttrafo">Distribution Trafos</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.build"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.call"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.call()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.compute_output_shape()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.AppendCatAsFloat.get_config"><code class="docutils literal notranslate"><span class="pre">AppendCatAsFloat.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.build"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.call"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.call()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.compute_output_shape()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableOffset.get_config"><code class="docutils literal notranslate"><span class="pre">CatTrainableOffset.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.build"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.call"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.call()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.compute_output_shape()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.CatTrainableScale.get_config"><code class="docutils literal notranslate"><span class="pre">CatTrainableScale.get_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger"><code class="docutils literal notranslate"><span class="pre">DistMerger</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.build"><code class="docutils literal notranslate"><span class="pre">DistMerger.build()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.call"><code class="docutils literal notranslate"><span class="pre">DistMerger.call()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="mixturemapping.layers.html#mixturemapping.layers.disttrafo.DistMerger.compute_output_shape"><code class="docutils literal notranslate"><span class="pre">DistMerger.compute_output_shape()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -250,7 +302,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Viktor Krückl (viktor@krueckl.de).</p>
+    <p>&#169; Copyright 2023, Viktor Krückl (viktor@krueckl.de).</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
