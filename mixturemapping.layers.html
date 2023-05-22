@@ -239,6 +239,15 @@ dist = distLayer(distParams)
 lossdist = mm.layers.DistributionKLLoss()({&quot;dist&quot;: dist, &quot;means&quot;: means, &quot;covariances&quot;: covs, &quot;weights&quot;: weights})
 </pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_samples</strong> (<em>int</em>) – Number of samples to integrate the KL divergence</p></li>
+<li><p><strong>symmetric</strong> (<em>bool</em>) – Flag to symmetrize the KL divergence</p></li>
+<li><p><strong>fix_na</strong> (<em>bool</em>) – Skip samples that lead have a nan KL divergence</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.distribution.DistributionKLLoss.build">
 <span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shapes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.distribution.DistributionKLLoss.build" title="Permalink to this definition"></a></dt>
@@ -934,7 +943,7 @@ output coordinates is available.</p>
 
 <span class="n">transformedDist</span> <span class="o">=</span> <span class="n">gmr</span><span class="p">({</span><span class="s2">&quot;means&quot;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s2">&quot;covariances&quot;</span><span class="p">:</span> <span class="n">cov</span><span class="p">,</span> <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">})</span>
 
-<span class="n">distLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Distribution</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">,</span> <span class="n">regularize_cov_epsilon</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">distLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Distribution</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">,</span> <span class="n">regularize_cov_epsilon</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">transformedDist</span><span class="p">)</span>
 
 <span class="n">sample_loss</span> <span class="o">=</span> <span class="n">distLayer</span><span class="o">.</span><span class="n">sample_loss</span><span class="p">(</span><span class="n">inTsamples</span><span class="p">)</span>  
@@ -945,8 +954,17 @@ output coordinates is available.</p>
 <dl class="simple">
 <dt>output_dim: int</dt><dd><p>size of the output dimension</p>
 </dd>
+<dt>input_dim:  int</dt><dd><p>size of the input dimension</p>
+</dd>
+<dt>mix_size:   int</dt><dd><p>size of the internally used GMM to represent the distribution</p>
+</dd>
+<dt>n_components: int</dt><dd><p>if set, the output GMM is limited to the most important n_components</p>
+</dd>
+<dt>regularize_cov_epsilon: float</dt><dd><p>if set, a maximal correlation is introduced (default: 0.98)</p>
+</dd>
+<dt>inv_rcond: float</dt><dd><p>singular value cutoffs for inverse (default: 1e-5)</p>
+</dd>
 </dl>
-<p>???</p>
 </section>
 <section id="id12">
 <h2>Returns<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
