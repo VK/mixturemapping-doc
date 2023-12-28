@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Distribution &mdash; Mixture Mapping alpha documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/mixturemapping.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mixturemapping.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -435,56 +437,7 @@ the first execution of <cite>call()</cite>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.TrainableCovMatrix.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.TrainableCovMatrix.call" title="Permalink to this definition"></a></dt>
-<dd><p>This is where the layer’s logic lives.</p>
-<p>The <cite>call()</cite> method may not create state (except in its first invocation,
-wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
-It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
-that is called automatically before <cite>call()</cite> executes the first time.</p>
-<dl>
-<dt>Args:</dt><dd><dl>
-<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
-- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
-<blockquote>
-<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
-of a keyword argument.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
-<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
-<li><p>Layers are built (<cite>build(input_shape)</cite> method)
-using shape info from <cite>inputs</cite> only.</p></li>
-<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
-<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
-If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
-casting behavior in mixed precision should be handled manually.</p></li>
-<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
-<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
-TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
-positional and keyword arguments.</p></li>
-</ul>
-</dd>
-<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
-</dd>
-<dt><a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
-The following optional keyword arguments are reserved:
-- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
-<blockquote>
-<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
-<cite>mask</cite> argument, its default value will be set to the mask generated
-for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
-that generated a corresponding mask, i.e. if it came from a Keras
-layer with masking support).</p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.TrainableCovMatrix.compute_output_shape">
@@ -563,56 +516,7 @@ the first execution of <cite>call()</cite>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.covmatrix.VarCovMatrix.call" title="Permalink to this definition"></a></dt>
-<dd><p>This is where the layer’s logic lives.</p>
-<p>The <cite>call()</cite> method may not create state (except in its first invocation,
-wrapping the creation of variables or other resources in <cite>tf.init_scope()</cite>).
-It is recommended to create state in <cite>__init__()</cite>, or the <cite>build()</cite> method
-that is called automatically before <cite>call()</cite> executes the first time.</p>
-<dl>
-<dt>Args:</dt><dd><dl>
-<dt>inputs: Input tensor, or dict/list/tuple of input tensors.</dt><dd><p>The first positional <cite>inputs</cite> argument is subject to special rules:
-- <cite>inputs</cite> must be explicitly passed. A layer cannot have zero</p>
-<blockquote>
-<div><p>arguments, and <cite>inputs</cite> cannot be provided via the default value
-of a keyword argument.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>NumPy array or Python scalar values in <cite>inputs</cite> get cast as tensors.</p></li>
-<li><p>Keras mask metadata is only collected from <cite>inputs</cite>.</p></li>
-<li><p>Layers are built (<cite>build(input_shape)</cite> method)
-using shape info from <cite>inputs</cite> only.</p></li>
-<li><p><cite>input_spec</cite> compatibility is only checked against <cite>inputs</cite>.</p></li>
-<li><p>Mixed precision input casting is only applied to <cite>inputs</cite>.
-If a layer has tensor arguments in <cite>*args</cite> or <cite>**kwargs</cite>, their
-casting behavior in mixed precision should be handled manually.</p></li>
-<li><p>The SavedModel input specification is generated using <cite>inputs</cite> only.</p></li>
-<li><p>Integration with various ecosystem packages like TFMOT, TFLite,
-TF.js, etc is only supported for <cite>inputs</cite> and not for tensors in
-positional and keyword arguments.</p></li>
-</ul>
-</dd>
-<dt><a href="#id5"><span class="problematic" id="id6">*</span></a>args: Additional positional arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.</p>
-</dd>
-<dt><a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs: Additional keyword arguments. May contain tensors, although</dt><dd><p>this is not recommended, for the reasons above.
-The following optional keyword arguments are reserved:
-- <cite>training</cite>: Boolean scalar tensor of Python boolean indicating</p>
-<blockquote>
-<div><p>whether the <cite>call</cite> is meant for training or inference.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p><cite>mask</cite>: Boolean input mask. If the layer’s <cite>call()</cite> method takes a
-<cite>mask</cite> argument, its default value will be set to the mask generated
-for <cite>inputs</cite> by the previous layer (if <cite>input</cite> did come from a layer
-that generated a corresponding mask, i.e. if it came from a Keras
-layer with masking support).</p></li>
-</ul>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>A tensor or list/tuple of tensors.</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mixturemapping.layers.covmatrix.VarCovMatrix.compute_output_shape">
@@ -815,15 +719,15 @@ output: [batch, mix, outDim]</p>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">newDist</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id9">
-<h2>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<section id="id1">
+<h2>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>regularize_cov_epsilon<span class="classifier">python float</span></dt><dd><p>if not None cov matrix corelation is restricted (eg. 0.995)</p>
 </dd>
 </dl>
 </section>
-<section id="id10">
-<h2>Returns<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<section id="id2">
+<h2>Returns<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -949,8 +853,8 @@ output coordinates is available.</p>
 <span class="n">sample_loss</span> <span class="o">=</span> <span class="n">distLayer</span><span class="o">.</span><span class="n">sample_loss</span><span class="p">(</span><span class="n">inTsamples</span><span class="p">)</span>  
 </pre></div>
 </div>
-<section id="id11">
-<h2>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h2>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>output_dim: int</dt><dd><p>size of the output dimension</p>
 </dd>
@@ -966,8 +870,8 @@ output coordinates is available.</p>
 </dd>
 </dl>
 </section>
-<section id="id12">
-<h2>Returns<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h2>Returns<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -1039,8 +943,8 @@ shape: [batch, mix]</p>
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms">
 <span class="sig-name descname"><span class="pre">fit_gmms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np_inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tf_inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_gmm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_gmm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.fit_gmms" title="Permalink to this definition"></a></dt>
 <dd><p>fit_gmms can be used to pretrain the internal gmm</p>
-<section id="id13">
-<h3>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<section id="id5">
+<h3>Parameters<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>np_inputs:  dict of np.array</dt><dd><p>The numpy inputs needed to train the model</p>
 </dd>
@@ -1080,8 +984,8 @@ if they want to modify it.</p>
 <dt class="sig sig-object py" id="mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values">
 <span class="sig-name descname"><span class="pre">set_gmm_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">means</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mixturemapping.layers.gmrmapping.DynamicGMR.set_gmm_values" title="Permalink to this definition"></a></dt>
 <dd><p>Set the GMM parameters without creating new tensorflow operations</p>
-<section id="id14">
-<h3>Parameters<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<section id="id6">
+<h3>Parameters<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>means<span class="classifier">numpy array </span></dt><dd><p>Means array of the combined mixture distribution
 shape: [mix, inDim]</p>
@@ -1265,8 +1169,8 @@ instead of an integer.</p>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">invNormalizationLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id15">
-<h2>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h2>
+<section id="id7">
+<h2>Parameters<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>mean<span class="classifier">numpy array</span></dt><dd><p>Mean value used for the transformation
 shape: [inDim]</p>
@@ -1279,8 +1183,8 @@ shape: [batch, mix, inDim]</p>
 </dd>
 </dl>
 </section>
-<section id="id16">
-<h2>Returns<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h2>
+<section id="id8">
+<h2>Returns<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -1348,8 +1252,8 @@ shape: [batch, mix]</p>
 <span class="n">dist_normalized</span> <span class="o">=</span> <span class="n">normalizationLayer</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
 </pre></div>
 </div>
-<section id="id17">
-<h2>Parameters<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h2>
+<section id="id9">
+<h2>Parameters<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>mean<span class="classifier">numpy array</span></dt><dd><p>Mean value used for the transformation
 shape: [inDim]</p>
@@ -1362,8 +1266,8 @@ shape: [batch, mix, inDim]</p>
 </dd>
 </dl>
 </section>
-<section id="id18">
-<h2>Returns<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h2>
+<section id="id10">
+<h2>Returns<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -1434,15 +1338,15 @@ shape: [batch, mix]</p>
 <span class="n">dist_with_float</span> <span class="o">=</span> <span class="n">normalizationLayer</span><span class="p">(</span><span class="n">dist</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="n">inCat</span> <span class="p">}</span> <span class="p">)</span>
 </pre></div>
 </div>
-<section id="id19">
-<h2>Parameters<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h2>
+<section id="id11">
+<h2>Parameters<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>vocabulary<span class="classifier">list of strings</span></dt><dd><p>vocabulary for the string to float lookup</p>
 </dd>
 </dl>
 </section>
-<section id="id20">
-<h2>Returns<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h2>
+<section id="id12">
+<h2>Returns<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -1573,15 +1477,15 @@ if they want to modify it.</p>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">transformLayer</span><span class="p">(</span><span class="n">dist</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="n">inCat</span> <span class="p">}</span> <span class="p">)</span>
 </pre></div>
 </div>
-<section id="id21">
-<h2>Parameters<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h2>
+<section id="id13">
+<h2>Parameters<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>vocabulary<span class="classifier">list of strings</span></dt><dd><p>vocabulary for the string to float lookup</p>
 </dd>
 </dl>
 </section>
-<section id="id22">
-<h2>Returns<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h2>
+<section id="id14">
+<h2>Returns<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -1712,15 +1616,15 @@ if they want to modify it.</p>
 <span class="n">dist</span> <span class="o">=</span> <span class="n">transformLayer</span><span class="p">(</span><span class="n">dist</span> <span class="o">|</span> <span class="p">{</span><span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="n">inCat</span> <span class="p">}</span> <span class="p">)</span>
 </pre></div>
 </div>
-<section id="id23">
-<h2>Parameters<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h2>
+<section id="id15">
+<h2>Parameters<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>vocabulary<span class="classifier">list of strings</span></dt><dd><p>vocabulary for the string to float lookup</p>
 </dd>
 </dl>
 </section>
-<section id="id24">
-<h2>Returns<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h2>
+<section id="id16">
+<h2>Returns<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
@@ -1856,8 +1760,8 @@ if they want to modify it.</p>
 <span class="n">combined_dist</span> <span class="o">=</span> <span class="n">mergeLayer</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">distA</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">distB</span><span class="p">})</span>
 </pre></div>
 </div>
-<section id="id25">
-<h2>Returns<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h2>
+<section id="id17">
+<h2>Returns<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h2>
 <dl class="simple">
 <dt>{</dt><dd><dl class="simple">
 <dt>“means”<span class="classifier">Tensorflow Tensor</span></dt><dd><p>Centers of the mixture distributions</p>
