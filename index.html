@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mixture Mapping &mdash; Mixture Mapping alpha documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+  <title>Indices and tables &mdash; Mixture Mapping alpha documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/mixturemapping.css" />
 
   
@@ -14,12 +14,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=1f169f65"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -66,7 +65,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Mixture Mapping</li>
+      <li class="breadcrumb-item active">Indices and tables</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -76,46 +75,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="module-mixturemapping"></span><section id="mixture-mapping">
-<h1>Mixture Mapping<a class="headerlink" href="#mixture-mapping" title="Permalink to this heading"></a></h1>
-<dl class="simple">
-<dt>Provides:</dt><dd><ol class="arabic simple">
-<li><p>Layers to build tensorflow models to map Gaussian mixtures</p></li>
-<li><p>Tools to compute yield values of Gaussian mixtures in complex binning schemes</p></li>
-</ol>
-</dd>
-</dl>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mixturemapping</span> <span class="k">as</span> <span class="nn">mm</span>  
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-
-<span class="n">inMeans</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Means&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
-<span class="n">inStdDevs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">,</span> <span class="n">inputMixM</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;StdDevs&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
-<span class="n">inWeight</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mixN</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Weights&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
-
-<span class="n">mapModel</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
-<span class="n">mapModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
-<span class="n">mapModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
-<span class="n">mapModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">))</span>
-
-<span class="n">deltaModel</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
-<span class="n">deltaModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
-<span class="n">deltaModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.001</span><span class="p">))</span> <span class="p">)</span>
-<span class="n">deltaModel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">))</span>
-
-<span class="n">covALayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">TrainableCovMatrix</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CovA&quot;</span><span class="p">)</span>
-<span class="n">covA</span> <span class="o">=</span> <span class="n">covALayer</span><span class="p">(</span><span class="n">inMeans</span><span class="p">)</span>
-
-<span class="n">mapLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GeneralMapping</span><span class="p">(</span><span class="n">outputMixM</span><span class="p">,</span> <span class="n">yModel</span><span class="o">=</span><span class="n">mapModel</span><span class="p">,</span> <span class="n">yDeltaModel</span><span class="o">=</span><span class="n">deltaModel</span><span class="p">,</span>
-  <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mapping&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">)</span>
-<span class="n">newDist</span> <span class="o">=</span> <span class="n">mapLayer</span><span class="p">({</span><span class="s1">&#39;means&#39;</span><span class="p">:</span> <span class="n">inMeans</span><span class="p">,</span> <span class="s1">&#39;stdDevs&#39;</span><span class="p">:</span> <span class="n">inStdDevs</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">inWeight</span><span class="p">,</span> <span class="s1">&#39;covA&#39;</span><span class="p">:</span> <span class="n">covA</span><span class="p">})</span>
-
-<span class="n">distLayer</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Distribution</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dataType</span><span class="p">,</span> <span class="n">regularize_cov_epsilon</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
-<span class="n">dist</span> <span class="o">=</span> <span class="n">distLayer</span><span class="p">(</span><span class="n">newDist</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<div class="toctree-wrapper compound">
+  <div class="toctree-wrapper compound" id="module-mixturemapping">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mixturemapping.html">Mixture Mapping</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="mixturemapping.html#layers">Layers</a><ul>
@@ -286,7 +246,7 @@
 </ul>
 </div>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
